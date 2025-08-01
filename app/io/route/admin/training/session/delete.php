@@ -1,5 +1,5 @@
 <?php
-require_once 'add/db.php';
+require_once 'add/badhat/db.php';
 
 return function ($args = null) {
     vd(1, __FILE__, $args);

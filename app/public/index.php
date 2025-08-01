@@ -4,9 +4,10 @@ set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../..');
 
 require 'add/badhat/build.php';
 require 'add/badhat/error.php';
-require 'add/badhat/io.php';
+require 'add/badhat/core.php';
 require 'add/badhat/db.php';
 require 'add/badhat/auth.php';
+
 require 'app/morph/html.php';
 
 
