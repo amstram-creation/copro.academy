@@ -38,25 +38,6 @@ $is_edit = !empty($service['id']);
 
         <div class="form-row">
             <fieldset class="form-group">
-                <label for="image_src">Chemin de l'image *</label>
-                <input type="text" name="image_src" id="image_src"
-                    value="<?= htmlspecialchars($service['image_src'] ?? '') ?>"
-                    required maxlength="255"
-                    placeholder="/static/assets/service-1.webp">
-                <small>Chemin relatif depuis la racine du site</small>
-            </fieldset>
-
-            <fieldset class="form-group">
-                <label for="alt_text">Texte alternatif *</label>
-                <input type="text" name="alt_text" id="alt_text"
-                    value="<?= htmlspecialchars($service['alt_text'] ?? '') ?>"
-                    required maxlength="255"
-                    placeholder="Description de l'image pour l'accessibilité">
-            </fieldset>
-        </div>
-
-        <div class="form-row">
-            <fieldset class="form-group">
                 <label for="link">Lien (optionnel)</label>
                 <input type="text" name="link" id="link"
                     value="<?= htmlspecialchars($service['link'] ?? '') ?>"

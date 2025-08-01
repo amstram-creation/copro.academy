@@ -29,10 +29,10 @@ INSERT INTO faq (slug, label, content) VALUES ('modalites-paiement','Quelles son
 
 
 TRUNCATE TABLE service;
-INSERT INTO service (label, image_src, alt_text, content, link, link_text, sort_order) VALUES
-('Gestion de copropriétés','/static/assets/hero.webp','Gestion de copropriétés','Accompagnement professionnel et outils adaptés pour optimiser la gestion de votre copropriété.','/contact','En savoir plus',1),
-('Formations certifiées','/static/assets/hero.webp','Formations certifiées','Maîtrisez les aspects juridiques et techniques grâce à nos programmes de formation reconnus.','/formation','Voir les formations',2),
-('Actualités & Webinaires','/static/assets/hero.webp','Actualités et webinaires','Restez informé des évolutions législatives et participez à nos sessions d\'information.','/article','Explorer',3);
+INSERT INTO service (label, content, link, link_text, sort_order) VALUES
+('Gestion de copropriétés','Accompagnement professionnel et outils adaptés pour optimiser la gestion de votre copropriété.','/contact','En savoir plus',1),
+('Formations certifiées','Maîtrisez les aspects juridiques et techniques grâce à nos programmes de formation reconnus.','/formation','Voir les formations',2),
+('Actualités & Webinaires','Restez informé des évolutions législatives et participez à nos sessions d\'information.','/article','Explorer',3);
 
 
 

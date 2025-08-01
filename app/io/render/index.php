@@ -9,7 +9,7 @@
     <div class="hero__content">
         <h1 class="hero__title"><?= l('home.hero_title'); ?></h1>
         <h2 class="hero__subtitle"><?= l('home.hero_subtitle'); ?></h2>
-        <p class="hero__description"><?= l('home.hero_text'); ?></p>
+        <p class="hero__description"><?= l('home.hero_description'); ?></p>
 
         <div class="hero__actions">
             <a href="/formation" class="btn btn--primary btn--lg">Découvrir nos formations</a>
@@ -26,8 +26,7 @@
     <div class="grid grid-cols-auto gap-xl">
         <?php foreach ($service as $item) : ?>
             <article class="card">
-                <img src="<?= $item['image'] ?? '/static/assets/hero.webp' ?>" alt="<?= $item['label'] ?? 'Service' ?>"
-                    loading="lazy" class="card__image">
+                <img src="/asset/image/service/avatar/<?= $item['id'] ?>.webp" alt="<?= $item['label'] ?? 'Service' ?>" loading="lazy" class="card__image">
                 <div class="card__body">
                     <h3 class="card__title"><?= $item['label'] ?? 'Service' ?></h3>
                     <p class="card__content"><?= $item['content'] ?? 'Description du service' ?></p>
@@ -76,5 +75,5 @@
 
 <?php
 return function ($this_html, $args = []) {
-    return ob_ret_get('app/io/render/layout.php', ($args ?? []) +  ['main' => $this_html])[1];
+    return ob_ret_get('app/io/render/layout.php', ($args ?? []) +  ['main' => $this_html, 'navbar__link__active' => ''])[1];
 };

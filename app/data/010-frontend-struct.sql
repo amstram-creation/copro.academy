@@ -5,6 +5,7 @@ CREATE TABLE coproacademy (
   slug VARCHAR(100) NOT NULL UNIQUE,
   label TEXT NOT NULL
 ) ENGINE = InnoDB;
+
 -- Table to store FAQ entries
 DROP TABLE IF EXISTS faq;
 CREATE TABLE faq (
@@ -17,14 +18,13 @@ CREATE TABLE faq (
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   revoked_at TIMESTAMP NULL DEFAULT NULL COMMENT 'Timestamp when the FAQ was revoked or deactivated'
 ) ENGINE = InnoDB;
+
 -- Table to store service information
 DROP TABLE IF EXISTS service;
 CREATE TABLE service (
   id INT AUTO_INCREMENT PRIMARY KEY,
   label VARCHAR(255) NOT NULL,
   content TEXT NOT NULL,
-  image_src VARCHAR(255) NOT NULL,
-  alt_text VARCHAR(255) NOT NULL,
   link VARCHAR(255) NOT NULL,
   link_text VARCHAR(100) NOT NULL,
   sort_order SMALLINT UNSIGNED NOT NULL DEFAUlT 0,
