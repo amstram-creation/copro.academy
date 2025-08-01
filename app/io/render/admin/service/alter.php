@@ -67,7 +67,8 @@ $is_edit = !empty($service['id']);
         <aside>
             <?php
             $dropzone_relative_path = 'service/avatar/' . $service['id'];
-            include('app/io/render/admin/dropzone.php')
+            $dropzone_keep_filename = 0;
+            include('app/io/render/admin/dropzone.php');
             ?>
 
             <section class="panel stats-box">

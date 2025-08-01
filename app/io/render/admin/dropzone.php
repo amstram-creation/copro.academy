@@ -10,7 +10,7 @@
     <?php else: ?>
         <input type="hidden" name="dropzone_new" value="1">
     <?php endif; ?>
-    <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/webp" data-with-filename="<?= (int)isset($dropzone_new) ?>" hidden>
+    <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/webp" data-keep-filename="<?= $dropzone_keep_filename ?? 0 ?>" hidden>
     <label for="avatar" class="drop-label">
         <span></span>
         <strong>JPEG, PNG ou WebP.<br>Max 2MB.</strong>
