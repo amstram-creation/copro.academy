@@ -25,17 +25,14 @@ try {
     $request_admin && auth(AUTH_GUARD);
 
     // business: find the route and invoke it
-    $in_route   = io_route($in_path, $re_quest, 'php', IO_DEEP | IO_FLEX)
-               ?: io_route($in_path, 'index');
-               
-    $in_quest   = io_fetch($in_route, [], IO_INVOKE);
-
+    [$route_path, $args]   = io_map($in_path, $re_quest, 'php', IO_DEEP | IO_FLEX) ?: io_map($in_path, 'index');
+    $in_quest      = io_run($route_path, $args ?? [], IO_INVOKE);
     // i18n: load french language
     l(null, require 'app/lang/fr.php');
 
     // render: match route file and absorb it when possible
-    $out_route = [IO_PATH => (str_replace($in_path, $out_path, $in_route[IO_PATH]) ?? '')] + $in_route;
-    $out_quest  = io_fetch($out_route, $in_quest[IO_INVOKE], IO_ABSORB);
+    $render_path = str_replace($in_path, $out_path, $route_path) ?? '';
+    $out_quest  = io_run($render_path, $in_quest[IO_INVOKE] ?? [], IO_ABSORB);
 
     // absorption is optional, http_body() settles the output
     if (is_string($out_quest[IO_BUFFER]) || is_string($out_quest[IO_ABSORB])) {
