@@ -4,7 +4,7 @@ require_once 'app/mapper/taxonomy.php';
 
 return function ($slug = null) {
     $slug = $slug[0] ?: null;
-    $training = row(db(), 'training_plus');
+    $training = row(db(), 'training_plus', 'slug');
 
     if ($slug) {
         $training(ROW_LOAD, ['slug' => $slug]);

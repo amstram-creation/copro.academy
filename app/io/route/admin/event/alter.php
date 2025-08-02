@@ -5,7 +5,7 @@ require_once 'add/arrow/arrow.php';
 
 return function ($args) {
     $slug = $args[0] ?? null;
-    $event = row(db(), 'event');
+    $event = row(db(), 'event', 'slug');
 
     if ($slug) {
         $res = $event(ROW_LOAD|ROW_GET, ['slug' => $slug]);
