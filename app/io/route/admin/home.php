@@ -1,7 +1,20 @@
 <?php
 //io/route/admin/home.php
 return function ($args) {
-    $slides = glob($_SERVER['DOCUMENT_ROOT'] . '/asset/image/hero_slide/*.webp');
+    if(isset($_GET['delete_asset'])) {
+        $file = rtrim($_SERVER['DOCUMENT_ROOT'], '/') . urldecode($_GET['delete_asset']);
+        $file = realpath($file);
+        if ($file === false || strpos($file, $_SERVER['DOCUMENT_ROOT']) !== 0) {
+            header('Location: /admin/home');
+            exit;
+        }
+        unlink($file);
+        header('Location: /admin/home');
+        exit;
+    }
+    
+    $slides = glob($_SERVER['DOCUMENT_ROOT'] . '/asset/image/home/hero_slide/*.webp');
+
     $slides = array_map(function ($slide) {
         return str_replace($_SERVER['DOCUMENT_ROOT'], '', $slide);
     }, $slides);

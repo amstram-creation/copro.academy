@@ -2,17 +2,18 @@
     throw new RuntimeException('Missing $dropzone_relative_path variable in ' . __FILE__);
 } ?>
 <section class="media-box panel drop-zone" data-upload="/admin/upload/<?= $dropzone_relative_path ?>">
-    <?php if (!isset($dropzone_new) || $dropzone_new === false): ?>
-        <figure>
-            <img src="/asset/image/<?= $dropzone_relative_path ?>.webp" class="drop-preview" alt=" - Photo manquante - " loading="lazy" />
-            <figcaption>Photo principale</figcaption>
-        </figure>
-    <?php else: ?>
+    <?php if (isset($dropzone_new) && $dropzone_new === true): ?>
         <input type="hidden" name="dropzone_new" value="1">
     <?php endif; ?>
+    <figure>
+
+        <img src="<?= $preview_src ?? '' ?>" class="drop-preview" />
+        <figcaption>Photo principale</figcaption>
+    </figure>
+
     <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/webp" data-keep-filename="<?= $dropzone_keep_filename ?? 0 ?>" hidden>
     <label for="avatar" class="drop-label">
         <span></span>
-        <strong>JPEG, PNG ou WebP.<br>Max 2MB.</strong>
+        <strong class="btn primary">Ajouter JPEG, PNG ou WebP.<br>Max 2MB.</strong>
     </label>
 </section>

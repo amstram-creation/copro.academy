@@ -490,6 +490,7 @@ ol h3 a {
     display: block;
     cursor: pointer;
 }
+.drop-label>*{display: block;}
 .drop-zone .drop-preview{
     max-width: 100%;
     height: auto;

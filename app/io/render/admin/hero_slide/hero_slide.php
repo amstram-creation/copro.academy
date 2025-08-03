@@ -5,16 +5,17 @@
 <div class="hero-slide-gallery">
     <?php foreach ($slides as $slide) : ?>
         <div class="hero-slide">
-            <img src="<?= str_replace($_SERVER['DOCUMENT_ROOT'], '', $slide)  ?>" alt="Hero Slide Image" class="hero-slide__image">
+            <img src="<?= $slide ?>" alt="Hero Slide Image" class="hero-slide__image">
             <div class="hero-slide__actions">
-                <a href="/admin/hero_slide/delete?file=<?= urlencode(basename($slide)) ?>" class="btn btn--danger">Supprimer</a>
+                <a href="/admin/home?delete_asset=<?= urlencode($slide) ?>" class="btn btn--danger">Supprimer</a>
             </div>
         </div>
     <?php endforeach; ?>
 
     <?php
-    $dropzone_relative_path = 'hero_slide/';
+    $dropzone_relative_path = 'home/hero_slide/';
     $dropzone_new = true;
+    $dropzone_keep_filename = 1;
     include('app/io/render/admin/dropzone.php');
     ?>
 </div>

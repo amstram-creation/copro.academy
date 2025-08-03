@@ -20,8 +20,7 @@ return function ($args = null) {
     foreach ($queries as $key => $sql) {
         ($_ = $db->query($sql)) && ($_ = $_->fetchAll()) && $data[$key] = $_;
     }
-
-    $hero_slides = glob($_SERVER['DOCUMENT_ROOT'] . '/asset/image/hero_slide/*.webp');
+    $hero_slides = glob($_SERVER['DOCUMENT_ROOT'] . '/asset/image/home/hero_slide/*.webp');
     $data['hero_slides'] = array_map(function ($slide) {
         return str_replace($_SERVER['DOCUMENT_ROOT'], '', $slide);
     }, $hero_slides);

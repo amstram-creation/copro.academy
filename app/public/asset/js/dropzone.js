@@ -63,18 +63,21 @@ function initDropZones(selector = '.drop-zone') {
 
 async function _uploadFile(file, zone, labelSpan, input, uploadUrl) {
   const formData = new FormData();
-
-  if (input.dataset.keepFilename === 1) {
+  console.log('Uploading file:', file.name);
+  console.log('Input dataset:', input.dataset);
+  if (input.dataset.keepFilename === '1') {
+    console.log('Keeping original filename:', file.name);
     let cleaname = file.name
       .replace(/[^\w\-\. ]+/g, '') // Remove anything not alphanumeric, dash, dot, space
       .replace(/\s+/g, '-') // Replace spaces with dashes
       .replace(/-+/g, '-') // Collapse multiple dashes
       .replace(/^\-+|\-+$/g, ''); // Trim leading/trailing dashes
+    console.log('Cleaned filename:', cleaname);
     uploadUrl += `${encodeURIComponent(cleaname)}`;
   }
 
   formData.append(input.name, file);
-  labelSpan.textContent = 'Uploading...';
+  labelSpan.textContent = 'Chargement..';
   
   try {
     console.log('Upload URL:', uploadUrl);
