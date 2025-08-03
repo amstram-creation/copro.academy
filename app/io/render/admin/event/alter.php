@@ -187,6 +187,7 @@ $is_edit = !empty($event['id']);
         </section>
         <?php
         $dropzone_relative_path = 'event/avatar/' . $event['slug'];
+        $preview_src = '/asset/image/' . $dropzone_relative_path . '.webp';
         include('app/io/render/admin/dropzone.php')
         ?>
 
