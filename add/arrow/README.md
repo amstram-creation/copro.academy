@@ -2,6 +2,8 @@
 
 **Single-row database operations using bitmask driven closures**
 
+This closure-based row context turns each database record into its own mini state machine, loading, mutating, validating, and persisting in a unified, predictable flow. 
+
 ## Key Advantages
 
 1. **Zero object overhead** - No model instantiation, hydration, or magic methods
