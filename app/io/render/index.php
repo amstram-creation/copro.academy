@@ -42,7 +42,7 @@
     <h2 id="recent-articles" class="text-center mb-2xl">Articles & Événements récents</h2>
 
     <div class="grid grid-cols-auto gap-xl">
-        <?php foreach ($recent_articles as $article) : ?>
+        <?php foreach ($articles_events as $article) : ?>
             <article class="card">
                 <?php if ($article['featured'] ?? false) : ?>
                     <div class="badge badge--error" style="position: absolute; top: 1rem; right: 1rem; z-index: 1;">À la
