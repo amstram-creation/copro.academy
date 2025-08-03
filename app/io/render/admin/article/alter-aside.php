@@ -18,7 +18,7 @@
             <small>
                 Publié le
                 <time datetime="<?= $article['enabled_at'] ?>">
-                    <?= strftime('%d %B %Y à %H:%M', strtotime($article['enabled_at'])) ?>
+                    <?= date('d F Y \à H:i',  strtotime($article['enabled_at'])) ?>
                 </time>
             </small>
         <?php endif; ?>
@@ -109,7 +109,7 @@
             <dt>Créé le</dt>
             <dd>
                 <time datetime="<?= $article['created_at'] ?>">
-                    <?= strftime('%d %B %Y', strtotime($article['created_at'])) ?>
+                    <?= date('d F Y', strtotime($article['created_at'])) ?>
                 </time>
             </dd>
 
@@ -117,7 +117,7 @@
                 <dt>Modifié le</dt>
                 <dd>
                     <time datetime="<?= $article['updated_at'] ?>">
-                        <?= strftime('%d %B %Y à %H:%M', strtotime($article['updated_at'])) ?>
+                        <?= date('d F Y \à H:i',  strtotime($article['updated_at'])) ?>
                     </time>
                 </dd>
             <?php endif; ?>

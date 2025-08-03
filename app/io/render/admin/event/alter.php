@@ -136,7 +136,7 @@ $is_edit = !empty($event['id']);
                     <small>
                         Publié le
                         <time datetime="<?= $event['enabled_at'] ?>">
-                            <?= strftime('%d %B %Y à %H:%M', strtotime($event['enabled_at'])) ?>
+                            <?= date('d F Y \à H:i',  strtotime($event['enabled_at'])) ?>
                         </time>
                     </small>
                 <?php endif; ?>
@@ -202,7 +202,7 @@ $is_edit = !empty($event['id']);
                     <dt>Créé le</dt>
                     <dd>
                         <time datetime="<?= $event['created_at'] ?>">
-                            <?= strftime('%d %B %Y', strtotime($event['created_at'])) ?>
+                            <?= date('d F Y', strtotime($event['created_at'])) ?>
                         </time>
                     </dd>
 
@@ -210,7 +210,7 @@ $is_edit = !empty($event['id']);
                         <dt>Modifié le</dt>
                         <dd>
                             <time datetime="<?= $event['updated_at'] ?>">
-                                <?= strftime('%d %B %Y à %H:%M', strtotime($event['updated_at'])) ?>
+                                <?= date('d F Y \à H:i',  strtotime($event['updated_at'])) ?>
                             </time>
                         </dd>
                     <?php endif; ?>
@@ -222,7 +222,7 @@ $is_edit = !empty($event['id']);
                         <dt>Date de l'événement</dt>
                         <dd>
                             <time datetime="<?= $event['event_date'] ?>">
-                                <?= strftime('%d %B %Y à %H:%M', strtotime($event['event_date'])) ?>
+                                <?= date('d F Y \à H:i',  strtotime($event['event_date'])) ?>
                             </time>
                         </dd>
                     <?php endif; ?>
