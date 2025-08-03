@@ -17,9 +17,13 @@ const ROW_RESET  = 256;
 const ROW_CREATE = ROW_SCHEMA | ROW_SET | ROW_SAVE;
 const ROW_UPDATE = ROW_LOAD | ROW_SET | ROW_SAVE; // update row context, save to DB, return row
 
+const SQL_IDENTIFIER = '/^[a-zA-Z_][a-zA-Z0-9_]*$/';
+
 function row(PDO $pdo, string $table, string $unique = 'id'): callable
 {
     (!$table || !$unique) && throw new InvalidArgumentException(__FUNCTION__ . ':no_table_or_unique_key');
+    preg_match(SQL_IDENTIFIER, $table)                          || throw new InvalidArgumentException(__FUNCTION__ . ':invalid_table_name');
+    preg_match(SQL_IDENTIFIER, $unique)                         || throw new InvalidArgumentException(__FUNCTION__ . ':invalid_table_unique_key');
 
     $row = []; // each row() call creates a new row context to use in the closure
     return function (int $behave, array $boat = []) use ($pdo, $table, $unique, &$row) {
@@ -130,8 +134,6 @@ function row_get(array $row, ?array $data = [], int $behave = 0): ?array
 
 function select_schema(PDO $pdo, string $table): array
 {
-    preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $table) || throw new InvalidArgumentException(__FUNCTION__ . ':invalid_table_name');
-
     $fields = [];
     $query = $pdo->query("SELECT * FROM `$table` LIMIT 1");
     $query || throw new RuntimeException("Failed to query schema for table `$table`");
@@ -166,7 +168,7 @@ function qb_select(string $table, array $data): array
 // qb_insert('article', ['title' => 'My Article', 'content' => 'This is the content.']);
 function qb_insert(string $table, array $data): array
 {
-    (!$table || !$data) && throw new BadFunctionCallException(__FUNCTION__ . ':empty_params');
+    (!$table || !$data)                     && throw new BadFunctionCallException(__FUNCTION__ . ':empty_params');
 
     $named_bindings = $placeholders = $fields = [];
     foreach ($data as $col => $val) {
