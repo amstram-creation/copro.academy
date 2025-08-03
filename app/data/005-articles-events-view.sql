@@ -9,6 +9,7 @@ CREATE OR REPLACE VIEW articles_events AS
     -- shared fields
     category_id,
     category_label,
+    enabled_at,
 
     -- unified date + type
     enabled_at   AS unified_date,
@@ -37,6 +38,7 @@ UNION ALL
     -- shared fields
     category_id,
     category_label,
+    enabled_at,
 
     -- unified date + type
     event_date   AS unified_date,
