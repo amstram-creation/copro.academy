@@ -40,9 +40,9 @@ function row(PDO $pdo, string $table, string $unique = 'id'): callable
             $behave & ROW_LOAD
                 && empty($row[ROW_LOAD]) && $boat                                       // can only load once
                 && ($db_io = row_load($pdo, $table, $boat)) && is_array($db_io)         // need PK or UK in assoc
-                && ($boat = null)
                 && ($row[ROW_LOAD] = $db_io)                                            // load row from DB
-                && !isset($row[ROW_SCHEMA]) && ($row[ROW_SCHEMA] = array_flip(array_keys($db_io)));
+                && !isset($row[ROW_SCHEMA]) && ($row[ROW_SCHEMA] = array_flip(array_keys($db_io)))
+                && ($boat = null);
                 
 
             // SET -- needs boat of data to set
