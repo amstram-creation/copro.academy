@@ -3,7 +3,6 @@ SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE coproacademy;
 INSERT INTO coproacademy (slug, label) VALUES
   ('label',                'Copro Academy'),
-  ('logo',                 '/static/assets/base/full/base_logo_transparent_background.png'),
   ('favicon',              '/static/assets/favicon.ico'),
   ('hero_image',           '/static/assets/hero.webp'),
   ('hero_alt_text',        'Image d\'accueil de Copro Academy'),

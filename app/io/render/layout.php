@@ -14,7 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
 
-    <link rel="icon" type="image/png" href="/static/assets/base/icon/base_icon_transparent_background.png">
+    <link rel="icon" type="image/png" href="/static/image/copro.academy.icon.alpha.png">
 
     <!-- Modular CSS -->
     <?= $prepend_css ?? '' ?>
@@ -39,7 +39,7 @@
     <header class="navbar" role="banner">
         <div class="navbar__container">
             <a href="/" class="navbar__logo-link" aria-label="<?= l('nav.back_to_home') ?>">
-                <img src="<?= viewport('coproacademy', 'logo') ?>" alt="<?= viewport('coproacademy', 'label') ?> Logo" class="navbar__logo">
+                <img src="/static/image/copro.academy.logo.alpha.png" alt="<?= viewport('coproacademy', 'label') ?> Logo" class="navbar__logo">
             </a>
 
             <button class="navbar__burger" aria-label="<?= l('nav.menu') ?>" aria-expanded="false">
