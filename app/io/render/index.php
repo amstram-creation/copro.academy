@@ -62,7 +62,7 @@
                         <span class="tag">Législation</span>
                         <span class="tag">2025</span>
                     </div>
-                    <a href="/article/<?= $article['slug'] ?>" class="btn btn--primary">Lire l'article complet</a>
+                    <a href="/article/detail/<?= $article['slug'] ?>" class="btn btn--primary">Lire l'article complet</a>
                 </div>
             </article>
         <?php endforeach; ?>
