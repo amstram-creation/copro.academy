@@ -18,9 +18,7 @@
 
     <!-- Modular CSS -->
     <?= $prepend_css ?? '' ?>
-    <link rel="stylesheet" href="/static/css/00-reset.css">
-    <link rel="stylesheet" href="/static/css/01-variables.css">
-    <link rel="stylesheet" href="/static/css/02-base.css">
+    <link rel="stylesheet" href="/static/css/0-foundation.css">
     <link rel="stylesheet" href="/static/css/03-layout.css">
     <link rel="stylesheet" href="/static/css/04-components.css">
     <link rel="stylesheet" href="/static/css/05-utilities.css">
