@@ -49,7 +49,7 @@ CREATE VIEW contact_request_plus AS
 
 DROP VIEW IF EXISTS event_plus;
 CREATE VIEW event_plus AS
-  SELECT e.id, e.slug, e.label, e.content, e.category_id, e.event_date, e.duration_minutes, e.price_ht, e.places_max, e.avatar, e.speaker, e.location, e.online,
+  SELECT e.id, e.slug, e.label, e.content, e.category_id, e.event_date, e.duration_minutes, e.price_ht, e.places_max, e.avatar, e.speaker, e.location, e.online, e.enabled_at,
   tc.label as category_label,
   COUNT(eb.event_id) as bookings_count
   FROM event e
