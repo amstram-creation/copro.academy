@@ -3,7 +3,7 @@ require_once 'add/arrow/arrow.php';
 // io/route/admin/service/alter.php
 return function ($args) {
     $id = $args[0] ?? null;
-    $service = row(db(), 'service');
+    $service = row(db(), 'service', 'id');
     if ($id) {
         $service(ROW_LOAD, ['id' => $id]);
         if (!$service) {
