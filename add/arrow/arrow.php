@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-const ROW_TABLE  = -2;
-const ROW_UNIQUE = -1;
-
 const ROW_LOAD   = 1;
 const ROW_SCHEMA = 2;
 const ROW_EDIT   = 4;
@@ -22,39 +19,40 @@ const ROW_UPDATE = ROW_LOAD | ROW_SET | ROW_SAVE; // update row context, save to
 
 function row(PDO $pdo, string $table, string $unique = 'id'): callable
 {
-    empty($table)                       && throw new InvalidArgumentException(__FUNCTION__ . ':no_table');
+    (!$table || !$unique) && throw new InvalidArgumentException(__FUNCTION__ . ':no_table_or_unique_key');
 
-    $row = [ROW_TABLE => $table, ROW_UNIQUE => $unique]; // each row() call creates a new row context to use in the closure
-    return function (int $behave, array $boat = []) use ($pdo, &$row) {
+    $row = []; // each row() call creates a new row context to use in the closure
+    return function (int $behave, array $boat = []) use ($pdo, $table, $unique, &$row) {
         try {
             // RESET -- first thing to do if requested
-            $behave & ROW_RESET
-                && ($row = [ROW_TABLE => $row[ROW_TABLE], ROW_UNIQUE => $row[ROW_UNIQUE]]) // reset row context
-                && ($behave &= ~ROW_RESET);
+            $behave & ROW_RESET && ($row = []);
 
+            // Short hand update/create setter
             $behave & (ROW_UPDATE | ROW_CREATE) && ($setter = $boat);
-            $behave & ROW_UPDATE && ($boat = [$row[ROW_UNIQUE] => $boat[$row[ROW_UNIQUE]]]);
+            $behave & ROW_UPDATE && ($boat = [$unique => $boat[$unique]]);
             $behave & ROW_CREATE && ($boat = null);
 
             // LOAD -- needs boat of PK/UK
             $behave & ROW_LOAD
                 && empty($row[ROW_LOAD]) && $boat                                       // can only load once
-                && ($db_io = row_load($pdo, $row[ROW_TABLE], $boat)) && is_array($db_io)         // need PK or UK in assoc
+                && ($db_io = row_load($pdo, $table, $boat)) && is_array($db_io)         // need PK or UK in assoc
+                && ($boat = null)
                 && ($row[ROW_LOAD] = $db_io)                                            // load row from DB
-                && ($row[ROW_SCHEMA] = array_flip(array_keys($db_io)))                  // set schema from loaded row
-                && ($boat = null);
+                && !isset($row[ROW_SCHEMA]) && ($row[ROW_SCHEMA] = array_flip(array_keys($db_io)));
+                
 
             // SET -- needs boat of data to set
             $behave === (ROW_SET | ROW_SCHEMA)
-                && ($row[ROW_SCHEMA] = ($boat ?: select_schema($pdo, $row[ROW_TABLE])))
+                && ($row[ROW_SCHEMA] = ($boat ?: select_schema($pdo, $table)))
                 && $boat && ($boat = null);                                             // falsify boat if we had one
 
             // put the boat back
-            $behave & ROW_SET && ($boat || $setter) && row_set($row, $setter ?? $boat, $behave) && ($boat = null);
+            $behave & ROW_SET && ($boat || $setter) && row_set($row, $setter ?? $boat, $unique, $behave) 
+                && ($boat = null);
 
             // SAVE --no boat
             $behave & ROW_SAVE && !empty($row[ROW_EDIT])
-                && ($row[ROW_SAVE] = row_save($pdo, $row));
+                && ($row[ROW_SAVE] = row_save($pdo, $table, $unique, $row));
 
             // GET  -- boat optional, last thing to do
             if ($behave & ROW_GET) {
@@ -74,14 +72,14 @@ function row(PDO $pdo, string $table, string $unique = 'id'): callable
     };
 }
 
-function row_save(PDO $pdo, array $row): PDOStatement
+function row_save(PDO $pdo, string $table, string $unique_key, array $row): PDOStatement
 {
     empty($row[ROW_EDIT])               && throw new InvalidArgumentException(__FUNCTION__ . ':no_alterations', 100);
 
-    $unique_value = $row[ROW_LOAD][$row[ROW_UNIQUE]] ?? null;
+    $unique_value = $row[ROW_LOAD][$unique_key] ?? null;
     [$sql, $bindings] = $unique_value 
-        ? qb_update($row[ROW_TABLE], $row[ROW_EDIT], $row[ROW_UNIQUE], (string)$unique_value)
-        : qb_insert($row[ROW_TABLE], $row[ROW_EDIT]);
+        ? qb_update($table, $row[ROW_EDIT], $unique_key, (string)$unique_value)
+        : qb_insert($table, $row[ROW_EDIT]);
         
     return row_run($pdo, $sql, $bindings);
 }
@@ -96,15 +94,14 @@ function row_load(PDO $pdo, string $table, array $data): array
     return $prepared->fetch(PDO::FETCH_ASSOC) ?: throw new RuntimeException("Failed to fetch row for $table");
 }
 
-function row_set(array &$row, array $data, int $behave = 0): bool
+function row_set(array &$row, array $data, string $unique_key, int $behave = 0): bool
 {
     $add_to_edit = null;
     foreach ($data as $col => $value) {
-        if ($col === $row[ROW_UNIQUE] || ($row[ROW_LOAD] && array_key_exists($col, $row[ROW_LOAD]) && $row[ROW_LOAD][$col] === $value))
-            continue;
-
-        $add_to_edit = $behave & ROW_EDIT || !empty($row[ROW_SCHEMA]) && isset($row[ROW_SCHEMA][$col]);
-        $row[$add_to_edit ? ROW_EDIT : ROW_MORE][$col] = $value;
+        if($col !== $unique_key && (!isset($row[ROW_LOAD]) || !array_key_exists($col, $row[ROW_LOAD]) || $row[ROW_LOAD][$col] !== $value)){
+            $add_to_edit = $behave & ROW_EDIT || !empty($row[ROW_SCHEMA]) && isset($row[ROW_SCHEMA][$col]);
+            $row[$add_to_edit ? ROW_EDIT : ROW_MORE][$col] = $value;
+        }
     }
     return $add_to_edit !== null;
 }
@@ -133,6 +130,8 @@ function row_get(array $row, ?array $data = [], int $behave = 0): ?array
 
 function select_schema(PDO $pdo, string $table): array
 {
+    preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $table) || throw new InvalidArgumentException(__FUNCTION__ . ':invalid_table_name');
+
     $fields = [];
     $query = $pdo->query("SELECT * FROM `$table` LIMIT 1");
     $query || throw new RuntimeException("Failed to query schema for table `$table`");
