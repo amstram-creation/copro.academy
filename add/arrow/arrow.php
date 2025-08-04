@@ -32,9 +32,8 @@ function row(PDO $pdo, string $table, string $unique = 'id'): callable
             $behave & ROW_RESET && ($row = []);
 
             // Short hand update/create setter
-            $behave & (ROW_UPDATE | ROW_CREATE) && ($setter = $boat);
-            $behave & ROW_UPDATE && ($boat = [$unique => $boat[$unique]]);
-            $behave & ROW_CREATE && ($boat = null);
+            $behave === ROW_UPDATE && ($setter = $boat) && ($boat = [$unique => $boat[$unique]]);
+            $behave === ROW_CREATE && ($setter = $boat) && ($boat = null);
 
             // LOAD -- needs boat of PK/UK
             $behave & ROW_LOAD

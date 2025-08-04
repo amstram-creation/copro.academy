@@ -6,7 +6,8 @@ require_once 'add/arrow/arrow.php';
 
 return function ($slug = null) {
     $slug = $slug[0] ?: null;
-    $article = row(db(), 'article', 'slug');
+    
+    $article = row(db(), 'article', 'id');
 
     if ($slug) {
         $article(ROW_LOAD, ['slug' => $slug]);
@@ -34,6 +35,7 @@ return function ($slug = null) {
 
         if ($article(ROW_GET | ROW_ERROR)) {
             vd($article(ROW_GET | ROW_EDIT));
+            vd($article(ROW_GET | ROW_MORE));
             vd($article(ROW_GET | ROW_ERROR));
             die;
         }
