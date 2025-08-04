@@ -31,7 +31,9 @@ try {
     l(null, require 'app/lang/fr.php');
 
     // render: match route file and absorb it when possible
-    $render_path = str_replace($in_path, $out_path, $route_path) ?? '';
+    [$render_path, $args]   = io_map($out_path, $re_quest, 'php', IO_DEEP | IO_FLEX) ?: io_map($out_path, 'index');
+
+    // $render_path = str_replace($in_path, $out_path, $route_path) ?? '';
     $out_quest  = io_run($render_path, $in_quest[IO_INVOKE] ?? [], IO_ABSORB);
 
     // absorption is optional, http_body() settles the output
