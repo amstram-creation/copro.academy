@@ -1,13 +1,32 @@
+<?php
+$callback = isset($_GET['message']);
+$success = $callback && $_GET['message'] === 'succes';
+?>
+
 <h1><?= l('contact.title'); ?></h1>
 
-<!-- Section intro -->
+<!-- Section reacting to ?message=success or other message -->
 <section>
-    <div class="card p-xl text-center mb-xl">
+    <div class="card <?= $callback && !$success ? 'warning-box' : '' ?> p-xl text-center mb-xl">
+        <?php if (isset($_GET['message'])): ?>
+            <?php $key = $_GET['message'] === 'succes' ? 'success' : 'error'; ?>
+            <h2 class="mb-md"><?= l('contact.form.' . $key . '.title'); ?></h2>
+            <?php if ($_GET['message'] === 'succes'): ?>
+                <p class="mb-0"> <?= l('contact.form.' . $key . '.text'); ?></p>
+            <?php else: ?>
+                <p class="mb-0"> <?= l('contact.form.' . $key . '.text'); ?></p>
+                <p>(<?= htmlspecialchars($_GET['message'], ENT_QUOTES, 'UTF-8'); ?>)</p>
+            <?php endif; ?>
+        <?php else: ?>
 
-        <h2 class="mb-md"><?= l('contact.subtitle'); ?></h2>
-        <p class="mb-0"><?= l('contact.description'); ?></p>
+            <!-- Section intro -->
+            <h2 class="mb-md"><?= l('contact.subtitle'); ?></h2>
+            <p class="mb-0"><?= l('contact.description'); ?></p>
+        <?php endif; ?>
     </div>
 </section>
+
+
 
 <!-- Informations de contact -->
 <section aria-labelledby="contact-info-title">
