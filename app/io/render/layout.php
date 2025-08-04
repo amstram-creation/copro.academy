@@ -87,19 +87,19 @@
                 <h3><?= l('footer.follow_us') ?></h3>
                 <div class="footer__social">
                     <a href="#" aria-label="Facebook">
-                        <img src="/static/assets/logo_réseaux_sociaux/facebook-svgrepo-com-3.svg" alt="Facebook">
+                        <img src="/static/image/facebook-svgrepo-com-3.svg" alt="Facebook">
                     </a>
                     <a href="#" aria-label="Instagram">
-                        <img src="/static/assets/logo_réseaux_sociaux/instagram-svgrepo-com-2.svg" alt="Instagram">
+                        <img src="/static/image/instagram-svgrepo-com-2.svg" alt="Instagram">
                     </a>
                     <a href="#" aria-label="LinkedIn">
-                        <img src="/static/assets/logo_réseaux_sociaux/linkedin-svgrepo-com.svg" alt="LinkedIn">
+                        <img src="/static/image/linkedin-svgrepo-com.svg" alt="LinkedIn">
                     </a>
                 </div>
             </div>
 
             <div class="footer__section text-center">
-                <img src="/static/assets/color1/full/white_logo_color1_background.png" alt="<?= l('img.logo_alt') ?>" style="max-height: 80px; width: auto;">
+                <img src="/static/image/copro.academy.logo.alpha.png" alt="<?= l('img.logo_alt') ?>" style="max-height: 160px; width: auto;">
             </div>
         </div>
 
@@ -107,7 +107,7 @@
 
         <div class="footer__copyright">
             <div class="flex justify-center gap-lg flex-wrap mt-sm">
-                <span><?= l('contact.email') ?> : <a href="mailto:CoproAcademy@contact.be"><?= viewport('coproacademy', 'email') ?></a></span>
+                <span><?= l('contact.email') ?> : <a href="mailto:<?= viewport('coproacademy', 'email') ?>"><?= viewport('coproacademy', 'email') ?></a></span>
                 <span><?= l('contact.phone') ?> : <a href="tel:<?= viewport('coproacademy', 'telephone') ?>"><?= viewport('coproacademy', 'telephone') ?></a></span>
                 <span><?= l('contact.address') ?> : <?= nl2br(viewport('coproacademy', 'adresse')) ?></span>
 
