@@ -477,8 +477,8 @@ section.faq{
 }
 
 .footer__social img {
-  width: 24px;
-  height: 24px;
+  width: 42px;
+  height: 42px;
   filter: brightness(0) invert(1);
   transition: transform var(--transition-fast);
 }
