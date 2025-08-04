@@ -34,7 +34,7 @@ $level_to_class = function ($slug) {
         <?php foreach ($formation as $item): ?>
             <!-- Formation card -->
             <article class="card formation-card" data-type="<?= $item['level_slug'] ?? '' ?>" data-level="<?= $item['level_label'] ?? '' ?>">
-                <img src="/asset/image/formation/avatar/<?= e($item, 'slug'); ?>" alt="<?= l('formation.card_image_alt') ?>" loading="lazy"
+                <img src="/asset/image/formation/avatar/<?= e($item, 'slug'); ?>.webp" alt="<?= l('formation.card_image_alt') ?>" loading="lazy"
                     class="card__image">
                 <div class="card__body">
 
