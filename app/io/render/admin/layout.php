@@ -34,8 +34,7 @@ $user = auth();
                 <a href="/admin/training">Formations</a>
                 <a href="/admin/trainer">Formateurs</a>
                 <a href="/admin/contact">Contact</a>
-                <a href="/admin/faq">FAQ</a>
-                <a href="/admin/lang">Lang</a>
+                <a href="/admin/site">Site</a>
             </nav>
         </div>
         <div class="admin-user">

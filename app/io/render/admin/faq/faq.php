@@ -5,6 +5,8 @@
     <h1>FAQ - Questions fréquentes</h1>
     <nav class="page-actions">
         <a href="/admin/faq/alter" class="btn">Nouvelle question</a>
+        <a href="/admin/site" class="btn secondary">Retour à la configuration</a>
+
     </nav>
 </header>
 

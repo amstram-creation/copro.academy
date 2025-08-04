@@ -39,7 +39,12 @@ $settings = db()->query("SELECT id, slug, label FROM coproacademy ORDER BY id")-
     }
 </style>
 
-<h1>Copro Academy Configuration</h1>
+<header class="page-header">
+    <h1>Configuration Copro.Academy</h1>
+    <div class="page-actions">
+        <a href="/admin/site" class="btn secondary">Retour à la configuration</a>
+    </div>
+</header>
 
 <form method="post">
     <?= csrf_field(3600) ?>
@@ -57,5 +62,9 @@ $settings = db()->query("SELECT id, slug, label FROM coproacademy ORDER BY id")-
         <?php endforeach; ?>
     </div>
 
-    <button type="submit">Update Settings</button>
+    <footer class="form-actions">
+        <button type="submit" class="btn">Mettre à jour</button>
+        <a href="/admin/faq" class="btn secondary">Annuler</a>
+    </footer>
+
 </form>

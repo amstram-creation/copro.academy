@@ -7,6 +7,7 @@
                 <?= strtoupper($lang) ?>
             </a>
         <?php endforeach; ?>
+        <a href="/admin/site" class="btn secondary">Retour à la configuration</a>
     </div>
 </div>
 
