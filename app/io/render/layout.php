@@ -86,13 +86,13 @@
             <div class="footer__section">
                 <h3><?= l('footer.follow_us') ?></h3>
                 <div class="footer__social">
-                    <a href="#" aria-label="Facebook">
+                    <a href="<?= viewport('coproacademy', 'facebook') ?>" aria-label="Facebook">
                         <img src="/static/image/facebook-svgrepo-com-3.svg" alt="Facebook">
                     </a>
-                    <a href="#" aria-label="Instagram">
+                    <a href="<?= viewport('coproacademy', 'instagram') ?>" aria-label="Instagram">
                         <img src="/static/image/instagram-svgrepo-com-2.svg" alt="Instagram">
                     </a>
-                    <a href="#" aria-label="LinkedIn">
+                    <a href="<?= viewport('coproacademy', 'linkedin') ?>" aria-label="LinkedIn">
                         <img src="/static/image/linkedin-svgrepo-com.svg" alt="LinkedIn">
                     </a>
                 </div>
