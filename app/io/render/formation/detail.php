@@ -48,7 +48,7 @@
 
     <!-- Image principale -->
     <figure class="formation-hero-image">
-        <img src="/static/assets/hero.webp" alt="<?= l('img.formation_alt') ?>" width="1200" height="400">
+        <img src="/asset/image/formation/avatar/<?= e($item, 'slug'); ?>.webp" alt="<?= l('img.formation_alt') ?>" width="1200" height="400">
         <figcaption><?= $training['label'] ?? l('formation.default_title'); ?></figcaption>
     </figure>
 
