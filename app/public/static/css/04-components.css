@@ -188,14 +188,15 @@
 }
 
 /* Form components */
-.form-check{
+.form-check {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: var(--space-sm);
   cursor: pointer;
 }
-.form-check input{
+
+.form-check input {
   width: 20px;
   height: 20px;
   margin: 0;
@@ -357,7 +358,8 @@
   font-size: var(--text-sm);
   margin-bottom: var(--space-lg);
 }
-.breadcrumb a{
+
+.breadcrumb a {
   color: var(--color-primary);
   text-decoration: none;
 }
@@ -381,7 +383,7 @@
 }
 
 /* FAQ */
-section.faq{
+section.faq {
   background: var(--color-gray-50);
 }
 
@@ -425,6 +427,18 @@ section.faq{
 .faq-content {
   padding: 0 var(--space-lg) var(--space-lg);
   color: var(--color-gray-500);
+}
+
+aside.partners__logo {
+  display: flex;
+  gap: var(--space-xl);
+  justify-content: space-around;
+
+}
+
+aside.partners__logo img,
+aside.partners__logo svg {
+  width: 9rem;
 }
 
 /* Footer */
