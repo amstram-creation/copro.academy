@@ -14,6 +14,6 @@
     <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/webp" data-keep-filename="<?= $dropzone_keep_filename ?? 0 ?>" hidden>
     <label for="avatar" class="drop-label">
         <span></span>
-        <strong class="btn primary">Ajouter JPEG, PNG ou WebP.<br>Max 2MB.</strong>
+        <strong class="btn primary">Ajouter JPEG, PNG ou WebP.<br>Max 20MB.</strong>
     </label>
 </section>

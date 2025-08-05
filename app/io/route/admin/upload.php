@@ -7,7 +7,7 @@ return function ($args = null) {
     $upload_to = implode(DIRECTORY_SEPARATOR, $args);
     $base_file = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . "/asset/image/$upload_to";
     try {
-        $result = upload_image($_FILES['avatar'], $base_file);
+        $result = upload_image($_FILES['avatar'], $base_file, 20*1024);
         $result || http_out(400, json_encode(['success' => false, 'error' => 'Invalid file upload']), ['Content-Type' => 'application/json']);
 
         $result = str_replace($_SERVER['DOCUMENT_ROOT'], '', $result);

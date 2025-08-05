@@ -33,7 +33,7 @@ $user = auth();
                 <a href="/admin/event">Événements</a>
                 <a href="/admin/training">Formations</a>
                 <a href="/admin/trainer">Formateurs</a>
-                <a href="/admin/contact">Contact</a>
+                <!-- <a href="/admin/contact">Contact</a> -->
                 <a href="/admin/site">Site</a>
             </nav>
         </div>
