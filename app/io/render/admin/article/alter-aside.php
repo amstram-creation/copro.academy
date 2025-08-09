@@ -97,6 +97,7 @@
 <?php if ($is_edit): ?>
     <?php
     $dropzone_relative_path = 'article/avatar/' . $article['slug'];
+    $preview_src = '/asset/image//'.$dropzone_relative_path . '.webp';
     include('app/io/render/admin/dropzone.php')
     ?>
 
