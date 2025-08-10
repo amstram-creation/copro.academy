@@ -9,13 +9,13 @@ $user = auth();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($title ?? 'Copro Academy Admin') ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
     <link rel="stylesheet" href="/asset/css/admin/variables.css">
     <link rel="stylesheet" href="/asset/css/admin/base.css">
     <link rel="stylesheet" href="/asset/css/admin/utilities.css">
     <link rel="stylesheet" href="/asset/css/admin/layout.css">
     <link rel="stylesheet" href="/asset/css/admin/components.css">
     <link rel="stylesheet" href="/asset/css/admin/emojis-unicode.css">
-
     <meta name="robots" content="noindex,nofollow">
     <?php if (isset($css)) : ?>
         <link rel="stylesheet" href="<?= htmlspecialchars($css) ?>">
@@ -45,6 +45,7 @@ $user = auth();
     <main class="admin-main">
         <?= $main ?? ''; ?>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <script nonce="<?= csp_nonce() ?>">
         // Admin UI interactions
         document.addEventListener('click', e => {
@@ -71,6 +72,48 @@ $user = auth();
 
             dropzones('.drop-zone');
             init();
+            // Replace textareas with Quill editors
+            document.querySelectorAll('form textarea').forEach((textarea) => {
+                // Hide original textarea
+                textarea.style.display = 'none';
+
+                // Create Quill container
+                const quillContainer = document.createElement('div');
+                quillContainer.className = 'wysiwyg';
+                quillContainer.innerHTML = textarea.value;
+
+                // Insert after textarea
+                textarea.parentNode.insertBefore(quillContainer, textarea.nextSibling);
+
+                // Initialize Quill
+                const quill = new Quill(quillContainer, {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            ['bold', 'italic', 'underline'],
+                            [{'color': []}],
+                            ['link', 'blockquote'],
+                            [{
+                                'list': 'ordered'
+                            }, {
+                                'list': 'bullet'
+                            }],
+                            ['clean'],
+                        ]
+                    }
+                });
+            });
+
+            // Add single submit listener per form
+            document.querySelectorAll('form:has(.wysiwyg)').forEach((form) => {
+                form.addEventListener('submit', () => {
+                    form.querySelectorAll('textarea.wysiwyg').forEach((textarea) => {
+                        const editor = textarea.nextElementSibling;
+                        const content = editor.querySelector('.ql-editor').innerHTML;
+                        textarea.value = content.replace(/<[^>]*>/g, '').trim() ? content : '';
+                    });
+                });
+            });
         });
     </script>
 </body>

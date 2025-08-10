@@ -31,6 +31,7 @@ $is_edit = !empty($event['id']);
                 required
                 maxlength="200"
                 aria-describedby="label-help">
+                
             <label for="label">Slug *</label>
             <input
                 type="text"
