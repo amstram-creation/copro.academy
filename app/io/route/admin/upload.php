@@ -18,12 +18,13 @@ return function ($args = null) {
     }
 };
 
-function upload_image(array $http_post_file, string $absolute_file_path_no_ext, int $max_kb = 2048, int $quality = 90): ?string
+function upload_image(array $http_post_file, string $absolute_file_path, int $max_kb = 2048, int $quality = 90): ?string
 {
     $_file = payload_guard($http_post_file, $max_kb);
     $gd_image = gd_create($_file)                       ?? throw new BadMethodCallException('Unsupported image type or error creating image resource');
     $gd_image = gd_max_size($gd_image, 1980, 1080)       ?? throw new BadMethodCallException('Error resizing image');
-    return save_gd_image($gd_image, $absolute_file_path_no_ext, $quality);
+
+    return save_gd_image($gd_image, $absolute_file_path, $quality);
 }
 
 function payload_guard($_file, $max_kb = 2048)
@@ -98,14 +99,18 @@ function gd_max_size(GdImage $src, int $max_width, int $max_height): ?GdImage
     return $dst;
 }
 
-function save_gd_image(GdImage $gd_image, string $absolute_file_path_no_ext, int $quality = 90): string
+function save_gd_image(GdImage $gd_image, string $absolute_file_path, int $quality = 90): string
 {
-    $folder = dirname($absolute_file_path_no_ext);
+
+    // Get directory and filename without extension
+    $folder = dirname($absolute_file_path);
+    
     if (!is_dir($folder) && !mkdir($folder, 0755, true)) {
         throw new RuntimeException("Failed to create directory: $folder");
     }
-
-    $target = rtrim($absolute_file_path_no_ext, '/\\');
+    
+    $target = rtrim($folder, '/\\');
+    $target = $target . DIRECTORY_SEPARATOR . pathinfo($absolute_file_path, PATHINFO_FILENAME);
     $candidate = "{$target}.webp";
     if (file_exists($candidate)) {
         $timestamp = (int) (microtime(true) * 1000000);
@@ -120,5 +125,5 @@ function save_gd_image(GdImage $gd_image, string $absolute_file_path_no_ext, int
         throw new RuntimeException("Failed to save image as WebP: $candidate");
     }
 
-    return $candidate;
+    return ($candidate);
 }

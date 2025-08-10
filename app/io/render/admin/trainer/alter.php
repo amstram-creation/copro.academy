@@ -83,19 +83,11 @@ $is_edit = !empty($trainer['id']);
                 <?php endif; ?>
             </fieldset>
         </section>
-
-        <section class="media-box panel drop-zone" data-upload="/admin/upload/trainer/avatar/<?= $trainer['slug'] ?>">
-            <figure>
-                <img src="/asset/image/trainer/avatar/<?= $trainer['slug'] ?>.webp" class="drop-preview" alt=" - Photo manquante - " loading="lazy" />
-                <figcaption>Photo de profile</figcaption>
-            </figure>
-            <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/webp" hidden>
-            <label for="avatar" class="drop-label">
-                <span></span>
-                <strong>JPEG, PNG ou WebP.<br>Max 2MB</strong>
-            </label>
-        </section>
-
+        <?php
+        $dropzone_relative_path = 'trainer/avatar/' . $trainer['slug'];
+        $preview_src = '/asset/image/' . $dropzone_relative_path . '.webp';
+        include('app/io/render/admin/dropzone.php')
+        ?>
 
         <?php if ($is_edit): ?>
 
