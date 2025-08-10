@@ -55,8 +55,9 @@ $success = $callback && $_GET['message'] === 'succes';
         </div>
     </div>
 </section>
-
-<!-- Formulaire de contact -->
+<?php if(!empty($_GET['sujet'])): ?>
+<div name="contact-form" id="contact-form" style="margin-bottom:13rem;"></div>
+<?php endif ?>
 <section aria-labelledby="form-title">
     <div class="card">
 

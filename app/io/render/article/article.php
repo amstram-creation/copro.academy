@@ -50,7 +50,7 @@
                         <time datetime="<?= e($item, 'unified_date') ?>"><?= e($item, 'unified_date') ?></time>
                     </div>
                     <h3><?= e($item, 'label') ?></h3>
-                    <p><?= e($item, 'content') ?></p>
+                    <p><?= $item['content'] ?></p>
 
                     <?php if ($item['type'] === 'event' || $item['type'] === 'webinar'): ?>
                         <div class="event-details">
@@ -67,7 +67,7 @@
                                 <p><strong><?= l('articles.event.price_label') ?></strong> <?= e($item, 'price_ht') ?> €</p>
                             <?php endif; ?>
                         </div>
-                        <a href="/article/detail/<?= e($item, 'slug'); ?>" class="cta"><?= l('articles.view_event') ?></a>
+                        <a href="/contact?sujet=sujet-event#contact-form" class="cta"><?= l('articles.view_event') ?></a>
                     <?php else: ?>
                         <div class="article-tags">
                             <span class="tag"><?= l('articles.tag.charges') ?></span>

@@ -55,11 +55,13 @@ SET @p = (SELECT id FROM taxonomy WHERE slug COLLATE utf8mb4_general_ci = @p);
 INSERT INTO taxonomy (slug, parent_id, label, sort_order)
 VALUES
   ('sujet-general',     @p, 'Général',     1),
-  ('sujet-formation',   @p, 'Formation',   2),
+  ('sujet-formation',   @p, 'Inscription à une formation',   2),
   ('sujet-support',     @p, 'Support',     3),
   ('sujet-partenariat', @p, 'Partenariat', 4),
   ('sujet-facturation', @p, 'Facturation', 5),
-  ('sujet-technique',   @p, 'Technique',   6);
+  ('sujet-technique',   @p, 'Technique',   6),
+  ('sujet-event',       @p, 'Inscription à un événement',   7),
+
 
 -- 6) article.category ⇒ taxonomy
 SET @p = 'article-categorie';

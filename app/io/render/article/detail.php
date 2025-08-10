@@ -37,7 +37,7 @@ for ($i = 1; $i <= 5; $i++) {
 
         <?php if (!empty($article['summary'])): ?>
             <p class="article-summary">
-                <?= e($article, 'summary') ?>
+                <?= $article['summary']; ?>
             </p>
         <?php endif; ?>
 
