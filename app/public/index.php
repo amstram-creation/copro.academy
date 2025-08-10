@@ -7,20 +7,20 @@ require 'add/badhat/error.php';
 require 'add/badhat/core.php';
 require 'add/badhat/db.php';
 require 'add/badhat/auth.php';
-
 require 'app/morph/html.php';
 
 
 // vd(qp(db(),"INSERT INTO operator (label, username, password_hash, status) VALUES (?, ?, ?, 1)",['jp', 'jp', password_hash('jp', PASSWORD_DEFAULT)]));die;
 try {
-    auth(AUTH_SETUP, 'operator.username', "SELECT `password_hash` FROM `operator` WHERE `username` = ?");
+    auth(AUTH_SETUP, 'operator.username', qp(db(), "SELECT `password_hash` FROM `operator` WHERE `username` = ?"));
+    l('fra'); // load french language
+
 
     $io = __DIR__ . '/../io';
     $in_path    = $io . '/route';
     $out_path   = $io . '/render';
-
+    
     $re_quest   = http_in();
-
     $request_admin = strpos($re_quest, '/admin') === 0;
     $request_admin && auth(AUTH_GUARD);
 
@@ -28,7 +28,6 @@ try {
     [$route_path, $args]   = io_map($in_path, $re_quest, 'php', IO_DEEP | IO_FLEX) ?: io_map($in_path, 'index');
     $in_quest      = io_run($route_path, $args ?? [], IO_INVOKE);
     // i18n: load french language
-    l(null, require 'app/lang/fr.php');
 
     // render: match route file and absorb it when possible
     [$render_path, $args]   = io_map($out_path, $re_quest, 'php', IO_DEEP | IO_FLEX) ?: io_map($out_path, 'index');
@@ -45,10 +44,11 @@ try {
     error_log('404 Not Found for ' . $re_quest);
     http_out(404, 'Not Found at all');
 } catch (LogicException | RuntimeException $t) {
+    vd(-1, $t);
     handle_badhat_exception($t);
     header('HTTP/1.1 500 Forbidden');
 } catch (Throwable $t) {
-    vd(0, $t);
+    vd(-1, $t);
     // out quest that fetch an error page within the layout, firsttests if error page has 200 
     die;
 }
