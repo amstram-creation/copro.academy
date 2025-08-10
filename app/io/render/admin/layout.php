@@ -110,11 +110,16 @@ $user = auth();
 
             // Add single submit listener per form
             document.querySelectorAll('form:has(.wysiwyg)').forEach((form) => {
-                form.addEventListener('submit', () => {
-                    form.querySelectorAll('textarea.wysiwyg').forEach((textarea) => {
-                        const editor = textarea.nextElementSibling;
-                        const content = editor.querySelector('.ql-editor').innerHTML;
+                form.addEventListener('submit', (e) => {
+                    // e.preventDefault(); // Prevent submission for debugging
+                    form.querySelectorAll('textarea').forEach((textarea) => {
+                        console.log('Submitting form with WYSIWYG editor');
+
+                        const fieldset = textarea.closest('fieldset');
+                        const content = fieldset.querySelector('.ql-editor').innerHTML;
+                        console.log('Content:', content);
                         textarea.value = content.replace(/<[^>]*>/g, '').trim() ? content : '';
+                        console.log('Updated textarea value:', textarea.value);
                     });
                 });
             });

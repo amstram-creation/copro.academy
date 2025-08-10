@@ -21,6 +21,7 @@ $is_edit = !empty($event['id']);
     <input type="hidden" name="id" value="<?= $event['id'] ?? null ?>">
 
     <section class="form-main">
+
         <fieldset class="form-group">
             <label for="label">Titre de l'événement *</label>
             <input
@@ -31,7 +32,9 @@ $is_edit = !empty($event['id']);
                 required
                 maxlength="200"
                 aria-describedby="label-help">
-                
+        </fieldset>
+        <fieldset class="form-group">
+
             <label for="label">Slug *</label>
             <input
                 type="text"
