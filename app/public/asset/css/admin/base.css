@@ -17,7 +17,6 @@ body {
 
 a {
     color: var(--primary-blue);
-    margin-block-end: var(--space-xs);
     text-decoration: none;
 }
 

@@ -1,6 +1,7 @@
 <?php
 extract($io ?? []);
 $user = auth();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -38,7 +39,8 @@ $user = auth();
             </nav>
         </div>
         <div class="admin-user">
-            <span><?= htmlspecialchars(auth()) ?></span>
+            <a href="/" target="_blank">Voir le site</a>
+            <a href="/admin"><?= htmlspecialchars(auth()) ?></a>
             <a href="/logout">Déconnexion</a>
         </div>
     </header>
@@ -91,7 +93,9 @@ $user = auth();
                     modules: {
                         toolbar: [
                             ['bold', 'italic', 'underline'],
-                            [{'color': []}],
+                            [{
+                                'color': []
+                            }],
                             ['link', 'blockquote'],
                             [{
                                 'list': 'ordered'

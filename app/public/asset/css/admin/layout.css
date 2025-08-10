@@ -50,13 +50,19 @@
 
 .admin-user {
     display: flex;
+    justify-content: end;
     align-items: center;
-    gap: var(--space-sm);
+    
+    gap: var(--space-lg);
+    padding:var(--space-sm);
+    padding-right:var(--space-lg);
     font-size: var(--text-sm);
+    background-color:var(--primary-blue);
+    color:var(--white);
 }
 
 .admin-user a {
-    color: var(--primary-blue);
+    color: var(--white);
     text-decoration: none;
 }
 
