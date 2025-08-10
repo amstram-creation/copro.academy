@@ -3,9 +3,6 @@ SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE coproacademy;
 INSERT INTO coproacademy (slug, label) VALUES
   ('label',                'Copro Academy'),
-  ('favicon',              '/static/assets/favicon.ico'),
-  ('hero_image',           '/static/assets/hero.webp'),
-  ('hero_alt_text',        'Image d\'accueil de Copro Academy'),
   ('email',                'info@copro.academy.be'),
   ('email-response-time',  '24'),
   ('telephone',            '+32 510 08 00 01'),
