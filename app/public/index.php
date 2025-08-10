@@ -22,7 +22,7 @@ try {
     
     $re_quest   = http_in();
     $request_admin = strpos($re_quest, '/admin') === 0;
-    $request_admin && auth(AUTH_GUARD);
+    $request_admin && auth(AUTH_GUARD, '/login');
 
     // business: find the route and invoke it
     [$route_path, $args]   = io_map($in_path, $re_quest, 'php', IO_DEEP | IO_FLEX) ?: io_map($in_path, 'index');
