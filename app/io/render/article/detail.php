@@ -109,7 +109,7 @@ for ($i = 1; $i <= 5; $i++) {
                             width="200" height="120">
                         <div class="related-content">
                             <h3><?= e($related, 'label') ?></h3>
-                            <p><?= e($related, 'summary') ?></p>
+                            <p><?= $related['summary'] ?></p>
                             <a href="/article/detail/<?= e($related, 'slug') ?>"><?= l('article.read_more'); ?></a>
                         </div>
                     </article>
