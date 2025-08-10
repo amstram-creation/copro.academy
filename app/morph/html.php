@@ -21,14 +21,23 @@ function e($content, ?string $field = null)
 function l($key, ...$args): string
 {
     static $cache = [];
+    static $lang = null;
 
-    // Handle initialization first
+    // Auto-detect language once
+    if ($lang === null) 
+        $lang = $key ?? $_GET['lang'] ?? $_SESSION['lang'] ?? 'fra';
+    
+    // Initialize cache from database
+    empty($cache) && ($cache = qp(db(), "SELECT msgid, msgstr FROM lang WHERE code = ?", [$lang])->fetchAll(PDO::FETCH_KEY_PAIR));
+    
+
+    // Handle manual cache reset
     if ($key === null && isset($args[0]) && is_array($args[0])) {
         $cache = $args[0];
         return '';
     }
 
-    (empty($cache) || !isset($cache[$key])) && trigger_error("Language key '$key' not found in cache #" . count($cache), E_USER_NOTICE);
+    (empty($cache) || !isset($cache[$key])) && trigger_error("Language key '$key' not found", E_USER_NOTICE);
 
     $text = $cache[$key] ?? $key;
 

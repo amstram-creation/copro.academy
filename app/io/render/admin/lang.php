@@ -1,7 +1,7 @@
 <div class="page-header">
-    <h1>Language Editor</h1>
+    <h1>Éditeur de textes</h1>
     <div class="page-actions">
-        <?php foreach ($languages as $file): $lang = basename($file, '.php'); ?>
+        <?php foreach ($languages as $lang): ?>
             <a href="?lang=<?= $lang ?>"
                 class="btn <?= $lang === $currentLang ? 'btn-primary' : 'btn-secondary' ?>">
                 <?= strtoupper($lang) ?>
@@ -35,12 +35,12 @@
     <aside>
         <div class="meta-box panel">
             <header>
-                <h2>Language Info</h2>
+                <h2>Informations sur la langue</h2>
             </header>
             <dl class="stats-list">
-                <dt>File</dt>
-                <dd><code><?= $currentLang ?>.php</code></dd>
-                <dt>Keys</dt>
+                <dt>Code</dt>
+                <dd><code><?= $currentLang ?></code></dd>
+                <dt>Clés</dt>
                 <dd><?= count($content ?? []) ?></dd>
                 <dt>Sections</dt>
                 <dd><?= count($sections ?? []) ?></dd>
@@ -49,7 +49,7 @@
 
         <div class="meta-box panel">
             <header>
-                <h2>Table of Contents</h2>
+                <h2>Table des matières</h2>
             </header>
             <ul class="toc-list">
                 <?php foreach ($sections as $sectionName => $items): ?>
@@ -65,6 +65,6 @@
     </aside>
 
     <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
     </div>
 </form>
