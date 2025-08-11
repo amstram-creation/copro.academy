@@ -22,10 +22,7 @@
                 <?php foreach ($items as $item): ?>
                     <div class="form-group">
                         <label><?= $item['key'] ?></label>
-                        <input type="text"
-                            name="content[<?= e($item['key']) ?>]"
-                            value="<?= e($item['value']) ?>"
-                            class="form-control">
+                        <input type="text" name="content[<?= e($item['key']) ?>]" value="<?= e($item['value']) ?>" class="form-control">
                     </div>
                 <?php endforeach; ?>
             </div>

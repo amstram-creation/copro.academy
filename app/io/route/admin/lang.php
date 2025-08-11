@@ -7,15 +7,14 @@ return function () {
     if ($_POST) {
         $content = $_POST['content'] ?? [];
 
-        foreach ($content as $msgid => $msgstr) {
-            foreach ($content as $msgid => $msgstr) {
-                qp(
-                    db(),
-                    "UPDATE lang SET msgstr = ? WHERE code = ? AND msgid = ?",
-                    [$msgstr, $currentLang, $msgid]
-                );
-            }
-        }
+        $prep = qp(
+            db(),
+            "UPDATE lang SET msgstr = ? WHERE code = ? AND msgid = ?"
+        );
+
+        foreach ($content as $msgid => $msgstr) 
+            $prep->execute([$msgstr, $currentLang, $msgid]);
+        
 
         http_out(200, '', ['Location' => "?lang=$currentLang"]);
     }
