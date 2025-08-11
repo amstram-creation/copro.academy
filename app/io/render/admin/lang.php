@@ -25,7 +25,9 @@
                         <input type="text" name="content[<?= e($item['key']) ?>]" value="<?= e($item['value']) ?>" class="form-control">
                     </div>
                 <?php endforeach; ?>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
+
         <?php endforeach; ?>
     </div>
 
@@ -61,7 +63,4 @@
         </div>
     </aside>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-    </div>
 </form>
