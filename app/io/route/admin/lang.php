@@ -8,12 +8,13 @@ return function () {
         $content = $_POST['content'] ?? [];
 
         foreach ($content as $msgid => $msgstr) {
-            qp(
-                db(),
-                "INSERT INTO lang (code, msgid, msgstr) VALUES (?, ?, ?)
-                      ON DUPLICATE KEY UPDATE msgstr = VALUES(msgstr)",
-                [$currentLang, $msgid, $msgstr]
-            );
+            foreach ($content as $msgid => $msgstr) {
+                qp(
+                    db(),
+                    "UPDATE lang SET msgstr = ? WHERE code = ? AND msgid = ?",
+                    [$msgstr, $currentLang, $msgid]
+                );
+            }
         }
 
         http_out(200, '', ['Location' => "?lang=$currentLang"]);
