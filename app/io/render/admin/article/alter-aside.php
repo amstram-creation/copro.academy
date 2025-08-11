@@ -2,36 +2,32 @@
     <header>
         <h2>Publication</h2>
     </header>
-    <button class="emoji-trigger">😀</button>
     <fieldset class="form-group">
         <legend class="sr-only">État de publication</legend>
         <label class="checkbox-label">
-            <input
-                type="checkbox"
-                name="published"
-                value="1"
-                <?= !empty($article['enabled_at']) ? 'checked' : '' ?>>
-            <span class="checkbox-text">Publier l'article</span>
-        </label>
-
-        <?php if ($article['enabled_at']): ?>
-            <small>
-                Publié le
-                <time datetime="<?= $article['enabled_at'] ?>">
-                    <?= date('d F Y \à H:i',  strtotime($article['enabled_at'])) ?>
-                </time>
-            </small>
-        <?php endif; ?>
-        <label class="checkbox-label">
-            <input
-                type="checkbox"
-                name="featured"
-                value="1"
-                <?= !empty($article['featured']) ? 'checked' : '' ?>>
-            <span class="checkbox-text">Article à la une</span>
+            <input type="checkbox" name="published" value="1" <?= !empty($article['enabled_at']) ? 'checked' : '' ?>>
+            <span class="checkbox-text">
+                <?php if ($article['enabled_at']): ?>
+                    Publié le <time datetime="<?= $article['enabled_at'] ?>"><?= $article['enabled_at'] ?></time>
+                <?php else: ?>
+                    Publier l'article
+                <?php endif; ?>
+            </span>
         </label>
     </fieldset>
-    <button type="submit" class="btn">Sauver</button>
+    <label class="checkbox-label">
+        <input
+            type="checkbox"
+            name="featured"
+            value="1"
+            <?= !empty($article['featured']) ? 'checked' : '' ?>>
+        <span class="checkbox-text">Article à la une</span>
+    </label>
+    </fieldset>
+    <footer>
+        <button type="submit" class="btn">Sauver</button>
+        <button class="emoji-trigger">😀</button>
+    </footer>
 
 </section>
 
@@ -97,7 +93,7 @@
 <?php if ($is_edit): ?>
     <?php
     $dropzone_relative_path = 'article/avatar/' . $article['slug'];
-    $preview_src = '/asset/image//'.$dropzone_relative_path . '.webp';
+    $preview_src = '/asset/image//' . $dropzone_relative_path . '.webp';
     include('app/io/render/admin/dropzone.php')
     ?>
 

@@ -71,17 +71,21 @@ $is_edit = !empty($trainer['id']);
                 <label class="checkbox-label">
                     <input type="checkbox" name="published" value="1"
                         <?= !empty($trainer['enabled_at']) ? 'checked' : '' ?>>
-                    <span>Profil actif et visible</span>
+                    <span class="checkbox-text">
+                        <?php if ($trainer['enabled_at']): ?>
+                            Activé le <time datetime="<?= $trainer['enabled_at'] ?>"><?= $trainer['enabled_at'] ?></time>
+                        <?php else: ?>
+                            Activer le formateur
+                        <?php endif; ?>
+                    </span>
                 </label>
-                <?php if ($trainer['enabled_at']): ?>
-                    <small>
-                        Activé le
-                        <time datetime="<?= $trainer['enabled_at'] ?>">
-                            <?= date('d/m/Y à H:i', strtotime($trainer['enabled_at'])) ?>
-                        </time>
-                    </small>
-                <?php endif; ?>
+
             </fieldset>
+
+            <footer>
+                <button type="submit" class="btn">Sauver</button>
+                <button class="emoji-trigger">😀</button>
+            </footer>
         </section>
         <?php
         $dropzone_relative_path = 'trainer/avatar/' . $trainer['slug'];

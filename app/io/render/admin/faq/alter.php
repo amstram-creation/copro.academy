@@ -28,7 +28,9 @@ $is_edit = !empty($faq['id']);
             <input type="text" name="label" id="label"
                 value="<?= htmlspecialchars($faq['label'] ?? '') ?>"
                 required maxlength="200">
+        </fieldset>
 
+        <fieldset class="form-group">
             <label for="slug">Slug *</label>
             <input type="text" name="slug" id="slug"
                 value="<?= htmlspecialchars($faq['slug'] ?? '') ?>"

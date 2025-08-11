@@ -420,6 +420,8 @@ const contactForm = {
   },
 };
 
+
+
 // ===================================
 // INITIALIZATION
 // ===================================
@@ -432,7 +434,7 @@ document.addEventListener("DOMContentLoaded", () => {
   new ArticlesPage();
   new FormationsPage();
   new TableOfContents(); // ← Ajouter cette ligne
-
+  formatPubDates();
   console.log("Copro Academy: Tous les composants initialisés");
 });
 // ===================================

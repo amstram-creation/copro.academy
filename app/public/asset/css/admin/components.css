@@ -582,6 +582,16 @@ ol h3 a {
     margin-block-end: var(--space-lg);
 }
 
+.publish-box footer{
+    display:flex;
+    justify-content: space-between;
+}
+.publish-box footer .emoji-trigger{
+    width:4rem;
+    border:0;
+    height:3rem;
+
+}
 .checkbox-label {
     display: flex;
     align-items: center;

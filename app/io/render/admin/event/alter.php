@@ -125,25 +125,18 @@ $is_edit = !empty($event['id']);
             <header>
                 <h2>Publication</h2>
             </header>
-
             <fieldset class="form-group">
                 <legend class="sr-only">État de publication</legend>
                 <label class="checkbox-label">
-                    <input
-                        type="checkbox"
-                        name="published"
-                        value="1"
-                        <?= !empty($event['enabled_at']) ? 'checked' : '' ?>>
-                    <span class="checkbox-text">Publier l'événement</span>
+                    <input type="checkbox" name="published" value="1" <?= !empty($event['enabled_at']) ? 'checked' : '' ?>>
+                    <span class="checkbox-text">
+                        <?php if ($event['enabled_at']): ?>
+                            Publié le <time datetime="<?= $event['enabled_at'] ?>"><?= $event['enabled_at'] ?></time>
+                        <?php else: ?>
+                            Publier l'événement
+                        <?php endif; ?>
+                    </span>
                 </label>
-                <?php if ($event['enabled_at']): ?>
-                    <small>
-                        Publié le
-                        <time datetime="<?= $event['enabled_at'] ?>">
-                            <?= date('d F Y \à H:i',  strtotime($event['enabled_at'])) ?>
-                        </time>
-                    </small>
-                <?php endif; ?>
             </fieldset>
 
             <fieldset class="form-group">
@@ -156,6 +149,11 @@ $is_edit = !empty($event['id']);
                     <span class="checkbox-text">Événement en ligne</span>
                 </label>
             </fieldset>
+            <footer>
+                <button type="submit" class="btn">Sauver</button>
+                <button class="emoji-trigger">😀</button>
+            </footer>
+
         </section>
 
         <section class="panel meta-box">

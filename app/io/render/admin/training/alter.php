@@ -111,21 +111,18 @@ $is_edit = !empty($training['id']);
             <header>
                 <h2>Publication</h2>
             </header>
-
             <fieldset class="form-group">
+                <legend class="sr-only">État de publication</legend>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="published" value="1"
-                        <?= !empty($training['enabled_at']) ? 'checked' : '' ?>>
-                    <span>Publier la formation</span>
+                    <input type="checkbox" name="published" value="1" <?= !empty($training['enabled_at']) ? 'checked' : '' ?>>
+                    <span class="checkbox-text">
+                        <?php if ($training['enabled_at']): ?>
+                            Publiée le <time datetime="<?= $training['enabled_at'] ?>"><?= $training['enabled_at'] ?></time>
+                        <?php else: ?>
+                            Publier la formation
+                        <?php endif; ?>
+                    </span>
                 </label>
-                <?php if ($training['enabled_at']): ?>
-                    <small>
-                        Publié le
-                        <time datetime="<?= $training['enabled_at'] ?>">
-                            <?= date('d/m/Y à H:i', strtotime($training['enabled_at'])) ?>
-                        </time>
-                    </small>
-                <?php endif; ?>
             </fieldset>
 
             <fieldset class="form-group">
@@ -136,6 +133,11 @@ $is_edit = !empty($training['id']);
                 </label>
                 <small>Délivre une certification à l'issue</small>
             </fieldset>
+
+            <footer>
+                <button type="submit" class="btn">Sauver</button>
+                <button class="emoji-trigger">😀</button>
+            </footer>
         </section>
 
         <section class="panel meta-box">
