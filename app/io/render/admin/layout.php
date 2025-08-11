@@ -61,7 +61,8 @@ $user = auth();
     <script type="module">
         import slugify from '/asset/js/slug.js';
         import dropzones from '/asset/js/dropzone.js';
-        import init from '/asset/js/emojis-unicode.js';
+        import hideEmojiModal from '/asset/js/emojis-unicode.js';
+        import formatPubDates from '/asset/js/format.js';
 
         document.addEventListener('DOMContentLoaded', () => {
             const labelInput = document.querySelector('main form input[name="label"]');
@@ -73,7 +74,8 @@ $user = auth();
             }
 
             dropzones('.drop-zone');
-            init();
+            hideEmojiModal();
+            formatPubDates('time[datetime]');
             // Replace textareas with Quill editors
             document.querySelectorAll('form textarea').forEach((textarea) => {
                 // Hide original textarea

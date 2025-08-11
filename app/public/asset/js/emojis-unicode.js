@@ -193,6 +193,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-export default function init() {
+export default function hideEmojiModal() {
   return { hideModal };
 }
