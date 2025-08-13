@@ -304,6 +304,8 @@ th {
 /* Images */
 img {
     border-radius: var(--radius-base);
+    width: 100%;
+    height: auto;
 }
 
 /* Code */
