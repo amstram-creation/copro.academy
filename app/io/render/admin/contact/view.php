@@ -10,7 +10,6 @@
         <header>
             <h2>Informations</h2>
         </header>
-        <?php //vd($contact, 'contact'); ?>
         <dl class="info-list">
             <dt>Nom</dt>
             <dd><?= htmlspecialchars($contact['label']) ?></dd>

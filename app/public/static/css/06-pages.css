@@ -824,6 +824,7 @@ body>main>section.login {
   line-height: 1.6;
 }
 
+
 .formation-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -1459,7 +1460,6 @@ body>main>section.login {
     font-size: var(--text-xs);
   }
 
-  .page-detail,
   .page-detail {
     padding: var(--space-md);
   }

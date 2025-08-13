@@ -32,13 +32,13 @@
 
                 <fieldset class="form-group">
                     <label for="time_start">Heure de début *</label>
-                    <input type="time" name="time_start" id="time_start"
+                    <input type="time" name="time_start" id="time_start" step="60"
                         value="<?= $edit_session['time_start'] ?? '' ?>" required>
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label for="time_end">Heure de fin *</label>
-                    <input type="time" name="time_end" id="time_end"
+                    <input type="time" name="time_end" id="time_end" step="60"
                         value="<?= $edit_session['time_end'] ?? '' ?>" required>
                 </fieldset>
             </div>
