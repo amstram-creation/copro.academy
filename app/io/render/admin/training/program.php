@@ -34,15 +34,6 @@
 
 <?php include __DIR__ . '/_program_schedule.php'; ?>
 
-<?php if (empty($sessions)): ?>
-    <section class="empty-program">
-        <div class="panel empty-state">
-            <h3>Programme vide</h3>
-            <p>Cette formation n'a pas encore de programme détaillé. Commencez par créer la première session.</p>
-            <a href="?add=1&day=1#session-form" class="btn">Créer la première session</a>
-        </div>
-    </section>
-<?php endif; ?>
 
 <script>
     function closeSessionForm() {

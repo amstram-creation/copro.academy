@@ -13,10 +13,10 @@
             </header>
 
             <?php if (empty($day_sessions)): ?>
-                <div class="empty-day">
+                <section class="empty-day">
                     <p>Aucune session programmée pour ce jour</p>
-                    <a href="?add=1&day=<?= $day ?>#session-form" class="btn secondary">Créer la première session</a>
-                </div>
+                    <a href="/admin/training/session/<?= $training['slug'] ?>" class="btn">Créer la première session</a>
+                </section>
             <?php else: ?>
                 <div class="sessions-timeline">
                     <?php foreach ($day_sessions as $session): ?>
