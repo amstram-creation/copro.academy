@@ -76,52 +76,75 @@ $user = auth();
             dropzones('.drop-zone');
             hideEmojiModal();
             formatPubDates('time[datetime]');
-            // Replace textareas with Quill editors
+
+            // Map each textarea → its Quill
+            const quillByTextarea = new WeakMap();
+
             document.querySelectorAll('form textarea').forEach((textarea) => {
-                // Hide original textarea
-                textarea.style.display = 'none';
+                // Hide textarea *visually*, not with display:none
+                textarea.classList.add('sr-only-input');
 
                 // Create Quill container
                 const quillContainer = document.createElement('div');
                 quillContainer.className = 'wysiwyg';
-                quillContainer.innerHTML = textarea.value;
+                quillContainer.innerHTML = textarea.value || ''; // initial value
 
                 // Insert after textarea
                 textarea.parentNode.insertBefore(quillContainer, textarea.nextSibling);
 
-                // Initialize Quill
+                // Init Quill
                 const quill = new Quill(quillContainer, {
                     theme: 'snow',
                     modules: {
                         toolbar: [
                             ['bold', 'italic', 'underline'],
                             [{
-                                'color': []
+                                color: []
                             }],
                             ['link', 'blockquote'],
                             [{
-                                'list': 'ordered'
+                                list: 'ordered'
                             }, {
-                                'list': 'bullet'
+                                list: 'bullet'
                             }],
                             ['clean'],
                         ]
                     }
                 });
+
+                // Keep textarea value in sync on every change (so it's ready before submit)
+                const syncToTextarea = () => {
+                    const html = quill.root.innerHTML;
+                    const plain = quill.getText().trim(); // ignores formatting
+                    textarea.value = plain ? html : ''; // empty if only formatting/whitespace
+                };
+                quill.on('text-change', syncToTextarea);
+                syncToTextarea(); // initial sync
+
+                quillByTextarea.set(textarea, quill);
+
+                // If browser flags the (hidden) textarea invalid, focus the Quill editor instead
+                textarea.addEventListener('invalid', (e) => {
+                    e.preventDefault(); // prevent native focus on hidden control
+                    const q = quillByTextarea.get(textarea);
+                    if (q) {
+                        q.focus();
+                        // optional: visual hint
+                        q.container.classList.add('ring-2', 'ring-red-500');
+                        setTimeout(() => q.container.classList.remove('ring-2', 'ring-red-500'), 1200);
+                    }
+                });
             });
 
-            // Add single submit listener per form
+            // Optional: on submit, final sync (harmless if already synced)
             document.querySelectorAll('form:has(.wysiwyg)').forEach((form) => {
-                form.addEventListener('submit', (e) => {
-                    // e.preventDefault(); // Prevent submission for debugging
-                    form.querySelectorAll('textarea').forEach((textarea) => {
-                        console.log('Submitting form with WYSIWYG editor');
-
-                        const fieldset = textarea.closest('fieldset');
-                        const content = fieldset.querySelector('.ql-editor').innerHTML;
-                        console.log('Content:', content);
-                        textarea.value = content.replace(/<[^>]*>/g, '').trim() ? content : '';
-                        console.log('Updated textarea value:', textarea.value);
+                form.addEventListener('submit', () => {
+                    form.querySelectorAll('textarea').forEach((ta) => {
+                        const q = quillByTextarea.get(ta);
+                        if (!q) return;
+                        const html = q.root.innerHTML;
+                        const plain = q.getText().trim();
+                        ta.value = plain ? html : '';
                     });
                 });
             });
