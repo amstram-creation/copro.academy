@@ -34,35 +34,35 @@ return function (array $training, callable $session) {
         $clean['slug'] = trim($_POST['slug'] ?: '');
     }
 
-    // Validate time order
-    if (strtotime($clean['time_end']) <= strtotime($clean['time_start'])) {
-        http_out(400, 'End time must be after start time');
-    }
+    // // Validate time order
+    // if (strtotime($clean['time_end']) <= strtotime($clean['time_start'])) {
+    //     http_out(400, 'End time must be after start time');
+    // }
 
-    // Check for time conflicts (same day, overlapping times)
-    $conflict_query = "
-            SELECT id FROM training_program 
-            WHERE training_id = ? AND day_number = ?
-            AND ((time_start < ? AND time_end > ?) OR (time_start < ? AND time_end > ?))
-        ";
-    $conflict_params = [
-        $training['id'],
-        $clean['day_number'],
-        $clean['time_end'],
-        $clean['time_start'],
-        $clean['time_end'],
-        $clean['time_start']
-    ];
+    // // Check for time conflicts (same day, overlapping times)
+    // $conflict_query = "
+    //         SELECT id FROM training_program 
+    //         WHERE training_id = ? AND day_number = ?
+    //         AND ((time_start < ? AND time_end > ?) OR (time_start < ? AND time_end > ?))
+    //     ";
+    // $conflict_params = [
+    //     $training['id'],
+    //     $clean['day_number'],
+    //     $clean['time_end'],
+    //     $clean['time_start'],
+    //     $clean['time_end'],
+    //     $clean['time_start']
+    // ];
 
-    if ($is_edit) {
-        $conflict_query .= " AND id != ?";
-        $conflict_params[] = (int)$_POST['id'];
-    }
+    // if ($is_edit) {
+    //     $conflict_query .= " AND id != ?";
+    //     $conflict_params[] = (int)$_POST['id'];
+    // }
 
-    $conflict = qp(db(), $conflict_query, $conflict_params)->fetch();
-    if ($conflict) {
-        http_out(400, 'Time conflict with existing session');
-    }
+    // $conflict = qp(db(), $conflict_query, $conflict_params)->fetch();
+    // if ($conflict) {
+    //     http_out(400, 'Time conflict with existing session');
+    // }
 
     // Save session
     $session(ROW_SET | ROW_SCHEMA);

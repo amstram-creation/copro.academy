@@ -210,10 +210,8 @@ $is_edit = !empty($training['id']);
                 ?>
 
                 <?php if (empty($program_sessions)): ?>
-                    <div class="panel-content empty-state">
+                    <div class="panel-content empty-state mt-lg">
                         <p>Aucun programme détaillé</p>
-                        <small>Créez le programme jour par jour avec les sessions, horaires et objectifs.</small>
-                        <a href="/admin/training/program/<?= $training['id'] ?>" class="btn secondary small">Créer le programme</a>
                     </div>
                 <?php else: ?>
                     <div class="panel-content">
@@ -241,20 +239,16 @@ $is_edit = !empty($training['id']);
                 <?php endif; ?>
 
                 <nav class="quick-actions">
-
                     <?php if ($training['enabled_at']): ?>
                         <a href="/training/detail/<?= $training['slug'] ?>" class="action-link" target="_blank">
                             <strong>Voir sur le site</strong>
-                            <span>Page publique de la formation</span>
                         </a>
                     <?php endif; ?>
-
                     <?php
                     $bookings_count = qp(db(), "SELECT COUNT(*) FROM booking WHERE training_id = ? AND revoked_at IS NULL", [$training['id']])->fetchColumn();
                     ?>
                     <a href="/admin/booking?training_id=<?= $training['id'] ?>" class="action-link">
                         <strong>Inscriptions (<?= $bookings_count ?>)</strong>
-                        <span>Gérer les participants</span>
                     </a>
                 </nav>
             </section>
