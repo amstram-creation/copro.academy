@@ -460,7 +460,9 @@ ol h3 a {
 .data-table td {
     vertical-align: top;
 }
-
+.data-table td img{
+    max-width:9rem;
+}
 .actions {
     white-space: nowrap;
 }

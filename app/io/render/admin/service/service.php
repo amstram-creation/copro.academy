@@ -59,13 +59,7 @@
                             <small><?= htmlspecialchars($service['preview']) ?><?= strlen($service['preview']) >= 100 ? '...' : '' ?></small>
                         </td>
                         <td>
-                            <?php if ($service['image_src']): ?>
-                                <img src="<?= htmlspecialchars($service['image_src']) ?>"
-                                    alt="<?= htmlspecialchars($service['label']) ?>"
-                                    style="width:40px;height:40px;object-fit:cover;border-radius:4px;">
-                            <?php else: ?>
-                                <span class="text-muted">Aucune</span>
-                            <?php endif; ?>
+                            <img src="/asset/image/service/avatar/<?= $service['id'] ?>.webp" alt="<?= $service['label'] ?? 'Service' ?>" loading="lazy" class="card__image">
                         </td>
                         <td>
                             <?php if ($service['link']): ?>
