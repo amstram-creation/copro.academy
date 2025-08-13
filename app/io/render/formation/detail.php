@@ -58,21 +58,14 @@
             <!-- Description -->
             <section class="formation-description">
                 <h2><?= l('formation.description_title') ?></h2>
-                <?php
-                $content = explode(PHP_EOL, $training['content'] ?? '');
-                foreach ($content as $paragraph) {
-                    if (trim($paragraph)) {
-                        echo '<p>' . htmlspecialchars($paragraph) . '</p>';
-                    }
-                }
-                ?>
+                <?= $training['content']; ?>
             </section>
 
             <!-- Objectifs -->
             <section class="formation-objectives">
                 <!-- Corps de l'article -->
                 <h2><?= l('formation.objectives_title') ?></h2>
-                <p><?= nl2br($training['objectives']) ?></p>
+                <p><?= $training['objectives'] ?></p>
             </section>
 
             <!-- Programme détaillé -->
