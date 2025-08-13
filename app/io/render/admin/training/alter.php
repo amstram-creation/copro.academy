@@ -25,18 +25,13 @@ $is_edit = !empty($training['id']);
                 value="<?= htmlspecialchars($training['label'] ?? '') ?>"
                 required maxlength="200">
         </fieldset>
+
         <fieldset class="form-group">
-
-            <label for="label">Slug *</label>
-            <input
-                type="text"
-                name="slug"
-                value="<?= htmlspecialchars($training['slug'] ?? '') ?>"
-                required
-                maxlength="200"
-                aria-describedby="label-help">
+            <label for="subtitle">Sous-titre de la formation *</label>
+            <input type="text" name="subtitle" id="subtitle"
+                value="<?= htmlspecialchars($training['subtitle'] ?? '') ?>"
+                required maxlength="255">
         </fieldset>
-
 
         <fieldset class="form-group">
             <label for="content">Description *</label>
@@ -146,7 +141,16 @@ $is_edit = !empty($training['id']);
             <header>
                 <h2>Métadonnées</h2>
             </header>
-
+            <fieldset class="form-group">
+                <label for="label">Slug *</label>
+                <input
+                    type="text"
+                    name="slug"
+                    value="<?= htmlspecialchars($training['slug'] ?? '') ?>"
+                    required
+                    maxlength="200"
+                    aria-describedby="label-help">
+            </fieldset>
             <fieldset class="form-group">
                 <label for="level_slug">Niveau *</label>
                 <select name="level_slug" id="level_slug" required>
