@@ -24,6 +24,8 @@ $is_edit = !empty($training['id']);
             <input type="text" name="label" id="label"
                 value="<?= htmlspecialchars($training['label'] ?? '') ?>"
                 required maxlength="200">
+        </fieldset>
+        <fieldset class="form-group">
 
             <label for="label">Slug *</label>
             <input
