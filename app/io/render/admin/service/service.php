@@ -56,7 +56,7 @@
                             <strong><?= htmlspecialchars($service['label']) ?></strong>
                         </td>
                         <td>
-                            <small><?= htmlspecialchars($service['preview']) ?><?= strlen($service['preview']) >= 100 ? '...' : '' ?></small>
+                            <small><?= $service['preview'] ?><?= strlen($service['preview']) >= 100 ? '...' : '' ?></small>
                         </td>
                         <td>
                             <img src="/asset/image/service/avatar/<?= $service['id'] ?>.webp" alt="<?= $service['label'] ?? 'Service' ?>" loading="lazy" class="card__image">

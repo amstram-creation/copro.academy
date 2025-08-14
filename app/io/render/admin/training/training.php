@@ -37,7 +37,6 @@
                     <th>Durée</th>
                     <th>Date de début</th>
                     <th>Formateur</th>
-                    <th>Inscriptions</th>
                     <th>Prix</th>
                     <th>Statut</th>
                     <th>Actions</th>
@@ -89,21 +88,7 @@
                                 <span class="text-muted">Non assigné</span>
                             <?php endif; ?>
                         </td>
-                        <td>
-                            <strong><?= $training['bookings_count'] ?? 0 ?></strong>
-                            <?php if ($training['places_max']): ?>
-                                / <?= $training['places_max'] ?>
-                                <?php
-                                $fill_rate = $training['places_max'] > 0 ? (($training['bookings_count'] ?? 0) / $training['places_max']) * 100 : 0;
-                                if ($fill_rate >= 90): ?>
-                                    <span class="badge full">Complet</span>
-                                <?php elseif ($fill_rate >= 75): ?>
-                                    <span class="badge filling">Bientôt complet</span>
-                                <?php endif; ?>
-                            <?php else: ?>
-                                <br><small>Illimité</small>
-                            <?php endif; ?>
-                        </td>
+
                         <td>
                             <strong><?= number_format($training['price_ht'], 0) ?> €</strong>
                             <br><small>HT</small>
