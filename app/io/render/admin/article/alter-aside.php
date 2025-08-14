@@ -39,9 +39,10 @@
     <fieldset class="form-group">
         <label for="category_slug">Catégorie</label>
         <select name="category_slug">
-            <?php foreach (($categories) as $slug => $label): ?>
+            <?php foreach (($categories) as $slug => $label): 
+                ?>
                 <option value="<?= $slug ?>"
-                    <?= ($article['category_slug'] ?? '') == $slug ? 'selected' : '' ?>>
+                    <?= ($article['category_id'] ?? '') == tag_id_by_slug($slug, 'article-categorie') ? 'selected' : '' ?>>
                     <?= htmlspecialchars($label) ?>
                 </option>
             <?php endforeach; ?>
