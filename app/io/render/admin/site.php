@@ -3,6 +3,7 @@
     <nav class="page-actions">
         <a href="/admin/faq" class="btn">FAQ</a>
         <a href="/admin/lang" class="btn">Traductions</a>
+        <a href="/admin/taxonomy" class="btn">Taxonomie</a>
         <a href="/admin/coproacademy" class="btn">Parametres</a>
     </nav>
 </header>

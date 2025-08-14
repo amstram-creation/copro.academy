@@ -42,10 +42,10 @@ function row(PDO $pdo, string $table, string $unique = 'id'): callable
                 && ($row[ROW_LOAD] = $db_io)                                            // load row from DB
                 && !isset($row[ROW_SCHEMA]) && ($row[ROW_SCHEMA] = array_flip(array_keys($db_io)))
                 && ($boat = null);
-                
+
 
             // SET -- needs boat of data to set
-            $behave === (ROW_SET | ROW_SCHEMA)
+            ($behave === (ROW_SET | ROW_SCHEMA) || $behave === (ROW_CREATE))
                 && ($row[ROW_SCHEMA] = ($boat ?: select_schema($pdo, $table)))
                 && $boat && ($boat = null);                                             // falsify boat if we had one
 
