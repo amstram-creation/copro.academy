@@ -67,7 +67,9 @@ $is_edit = !empty($article['id']);
                 class="content-editor"
                 rows="10"
                 maxlength="500"
-                aria-describedby="content-help"><?= ($article['content'] ?? '') ?></textarea>
+                aria-describedby="content-help">
+                <?= ($article['content'] ?? '') ?>
+            </textarea>
             <small id="content-help">Contenu principal, avant les sections</small>
         </fieldset>
 
@@ -76,12 +78,9 @@ $is_edit = !empty($article['id']);
             <div class="section-block" data-index="<?= $i ?>">
                 <fieldset class="form-group">
                     <label for="section<?= $i ?>_label">Section <?= $i ?> – Titre</label>
-                    <textarea
-                        type="text"
-                        id="section<?= $i ?>_label"
-                        name="section<?= $i ?>_label"
-                        maxlength="200"
-                        placeholder="Titre de la section <?= $i ?>"><?= ($article['section' . $i . '_label'] ?? '') ?></texatarea>
+                    <textarea id="section<?= $i ?>_label" name="section<?= $i ?>_label" maxlength="200" placeholder="Titre de la section <?= $i ?>">
+                        <?= $article['section' . $i . '_label'] ?? '' ?>
+                    </textarea>
                 </fieldset>
 
                 <fieldset class="form-group">
@@ -91,7 +90,9 @@ $is_edit = !empty($article['id']);
                         name="section<?= $i ?>_content"
                         rows="10"
                         class="content-editor"
-                        placeholder="Contenu de la section <?= $i ?>"><?= ($article['section' . $i . '_content'] ?? '') ?></textarea>
+                        placeholder="Contenu de la section <?= $i ?>">
+                        <?= ($article['section' . $i . '_content'] ?? '') ?>
+                    </textarea>
                 </fieldset>
             </div>
         <?php endfor; ?>
