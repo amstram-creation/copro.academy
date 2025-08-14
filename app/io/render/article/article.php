@@ -55,7 +55,7 @@
                     <?php if ($item['type'] === 'event' || $item['type'] === 'webinar'): ?>
                         <div class="event-details">
                             <?php if (isset($item['event_date'])): ?>
-                                <p><strong><?= l('articles.event.date_label') ?></strong> <?= e($item, 'event_date') ?></p>
+                                <p><strong><?= l('articles.event.date_label') ?></strong> <time datetime><?= e($item, 'event_date') ?></time></p>
                             <?php endif; ?>
                             <?php if (isset($item['duration_minutes'])): ?>
                                 <p><strong><?= l('articles.event.duration_label') ?></strong> <?= e($item, 'duration_minutes') ?> <?= l('articles.event.minutes') ?></p>
