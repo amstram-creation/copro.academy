@@ -69,11 +69,6 @@
                         </div>
                         <a href="/contact?sujet=sujet-event#contact-form" class="cta"><?= l('articles.view_event') ?></a>
                     <?php else: ?>
-                        <div class="article-tags">
-                            <span class="tag"><?= l('articles.tag.charges') ?></span>
-                            <span class="tag"><?= l('articles.tag.legislation') ?></span>
-                            <span class="tag">2025</span>
-                        </div>
                         <a href="/article/detail/<?= e($item, 'slug'); ?>" class="cta"><?= l('articles.read_full') ?></a>
                     <?php endif; ?>
                 </div>

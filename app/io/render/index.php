@@ -57,11 +57,7 @@
                     </div>
                     <h3 class="card__title"><?= $article['label'] ?? 'Titre manquant' ?></h3>
                     <p class="card__content"><?= $article['content'] ?? '...' ?></p>
-                    <div class="flex flex-wrap gap-sm mb-lg">
-                        <span class="tag">Charges</span>
-                        <span class="tag">Législation</span>
-                        <span class="tag">2025</span>
-                    </div>
+    
                     <a href="/article/detail/<?= $article['slug'] ?>" class="btn btn--primary">Lire l'article complet</a>
                 </div>
             </article>
