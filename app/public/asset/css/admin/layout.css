@@ -8,9 +8,9 @@
     background: var(--white);
     border-block-end: var(--border-width) solid var(--border-color);
     box-shadow: var(--shadow);
-    position: sticky;
-    inset-block-start: 0;
-    z-index: 100;
+    /* position: sticky; */
+    /* inset-block-start: 0; */
+    /* z-index: 100; */
 }
 
 .admin-nav {
