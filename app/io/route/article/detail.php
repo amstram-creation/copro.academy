@@ -13,7 +13,7 @@ return function ($args = null) {
 
     $data['related_articles'] = qp(
         $db,
-        "SELECT * FROM article_plus WHERE category_id = :category_id AND slug != :slug ORDER BY enabled_at DESC LIMIT 3",
+        "SELECT * FROM article_plus WHERE enabled_at IS NOT NULL AND category_id = :category_id AND slug != :slug ORDER BY enabled_at DESC LIMIT 3",
         ['category_id' => $data['article']['category_id'], 'slug' => $data['article']['slug']]
     )->fetchAll();
     return $data;
