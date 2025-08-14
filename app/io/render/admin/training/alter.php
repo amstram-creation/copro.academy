@@ -21,16 +21,17 @@ $is_edit = !empty($training['id']);
     <section class="form-main">
         <fieldset class="form-group">
             <label for="label">Titre de la formation *</label>
-            <input type="text" name="label" id="label"
-                value="<?= htmlspecialchars($training['label'] ?? '') ?>"
-                required maxlength="200">
+            <textarea type="text" name="label" id="label"
+                required maxlength="200"><?= htmlspecialchars($training['label'] ?? '') ?>
+            </textarea>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="subtitle">Sous-titre de la formation *</label>
-            <input type="text" name="subtitle" id="subtitle"
-                value="<?= htmlspecialchars($training['subtitle'] ?? '') ?>"
+            <textarea type="text" name="subtitle" id="subtitle"
                 required maxlength="255">
+                <?= htmlspecialchars($training['subtitle'] ?? '') ?>
+            </textarea>
         </fieldset>
 
         <fieldset class="form-group">
@@ -81,7 +82,7 @@ $is_edit = !empty($training['id']);
         <fieldset class="form-group">
             <label for="objectives">Objectifs pédagogiques</label>
             <textarea name="objectives" id="objectives" rows="4"><?= htmlspecialchars($training['objectives'] ?? '') ?></textarea>
-            <small>Décrivez ce que les participants apprendront; veillez a separer chaque objectif par un point virgule (;)</small>
+            <small>Décrivez ce que les participants apprendront</small>
         </fieldset>
 
         <fieldset class="form-group">

@@ -22,14 +22,16 @@ $is_edit = !empty($event['id']);
 
         <fieldset class="form-group">
             <label for="label">Titre de l'événement *</label>
-            <input
+            <textarea
                 type="text"
                 id="label"
                 name="label"
-                value="<?= htmlspecialchars($event['label'] ?? '') ?>"
+                value=""
                 required
                 maxlength="200"
-                aria-describedby="label-help">
+                aria-describedby="label-help"><?= htmlspecialchars($event['label'] ?? '') ?>
+            </textarea>
+
         </fieldset>
         <fieldset class="form-group">
 
@@ -107,13 +109,14 @@ $is_edit = !empty($event['id']);
 
         <fieldset class="form-group">
             <label for="location">Lieu</label>
-            <input
+            <textarea
                 type="text"
                 id="location"
                 name="location"
-                value="<?= htmlspecialchars($event['location'] ?? '') ?>"
                 maxlength="200"
                 aria-describedby="location-help">
+                <?= htmlspecialchars($event['location'] ?? '') ?>
+            </textarea>
             <small id="location-help">Adresse physique ou plateforme en ligne</small>
         </fieldset>
     </section>

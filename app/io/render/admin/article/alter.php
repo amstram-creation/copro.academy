@@ -24,15 +24,15 @@ $is_edit = !empty($article['id']);
     <section class="form-main">
         <fieldset class="form-group">
             <label for="label">Titre *</label>
-            <input
+            <textarea
                 type="text"
                 id="label"
                 name="label"
-                value="<?= htmlspecialchars($article['label'] ?? '') ?>"
                 required
                 maxlength="200"
-                data-emoji
                 aria-describedby="label-help">
+                <?= htmlspecialchars($article['label'] ?? '') ?>
+            </textarea>
         </fieldset>
 
         <fieldset class="form-group">
@@ -76,13 +76,12 @@ $is_edit = !empty($article['id']);
             <div class="section-block" data-index="<?= $i ?>">
                 <fieldset class="form-group">
                     <label for="section<?= $i ?>_label">Section <?= $i ?> – Titre</label>
-                    <input
+                    <textarea
                         type="text"
                         id="section<?= $i ?>_label"
                         name="section<?= $i ?>_label"
-                        value="<?= htmlspecialchars($article['section' . $i . '_label'] ?? '') ?>"
                         maxlength="200"
-                        placeholder="Titre de la section <?= $i ?>">
+                        placeholder="Titre de la section <?= $i ?>"><?= htmlspecialchars($article['section' . $i . '_label'] ?? '') ?></texatarea>
                 </fieldset>
 
                 <fieldset class="form-group">
