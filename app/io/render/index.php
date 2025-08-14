@@ -56,7 +56,7 @@
                         <time class="article-date" datetime="<?= $article['enabled_at'] ?? '' ?>"><?= $article['enabled_at'] ?? '' ?></time>
                     </div>
                     <h3 class="card__title"><?= $article['label'] ?? 'Titre manquant' ?></h3>
-                    <p class="card__content"><?= $article['summary'] ?? 'Titre manquant' ?></p>
+                    <p class="card__content"><?= $article['content'] ?? '...' ?></p>
                     <div class="flex flex-wrap gap-sm mb-lg">
                         <span class="tag">Charges</span>
                         <span class="tag">Législation</span>
