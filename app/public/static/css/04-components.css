@@ -931,3 +931,8 @@ aside.partners__logo svg {
   border-radius: 4px;
   font-weight: bold;
 }
+
+
+input#EMAIL{
+  color:black;
+}
