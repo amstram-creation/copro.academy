@@ -8,9 +8,7 @@ $is_edit = !empty($event['id']);
         <nav class="page-actions">
             <a href="/admin/event" class="btn secondary">Retour à la liste</a>
             <?php if (!empty($event['enabled_at'])): ?>
-                <a href="/event/detail/<?= $event['slug'] ?>" class="btn secondary" target="_blank">
-                    Voir sur le site
-                </a>
+                <a href="/article" class="btn secondary" target="_blank">Voir sur le site</a>
             <?php endif; ?>
         </nav>
     <?php endif; ?>
