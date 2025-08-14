@@ -31,7 +31,7 @@ $is_edit = !empty($article['id']);
                 required
                 maxlength="200"
                 aria-describedby="label-help">
-                <?= htmlspecialchars($article['label'] ?? '') ?>
+                <?= ($article['label'] ?? '') ?>
             </textarea>
         </fieldset>
 
@@ -55,7 +55,7 @@ $is_edit = !empty($article['id']);
                 name="summary"
                 rows="3"
                 maxlength="500"
-                aria-describedby="summary-help"><?= htmlspecialchars($article['summary'] ?? '') ?></textarea>
+                aria-describedby="summary-help"><?= ($article['summary'] ?? '') ?></textarea>
             <small id="summary-help">Description courte pour les réseaux sociaux et moteurs de recherche</small>
         </fieldset>
 
@@ -67,7 +67,7 @@ $is_edit = !empty($article['id']);
                 class="content-editor"
                 rows="10"
                 maxlength="500"
-                aria-describedby="content-help"><?= htmlspecialchars($article['content'] ?? '') ?></textarea>
+                aria-describedby="content-help"><?= ($article['content'] ?? '') ?></textarea>
             <small id="content-help">Contenu principal, avant les sections</small>
         </fieldset>
 
@@ -81,7 +81,7 @@ $is_edit = !empty($article['id']);
                         id="section<?= $i ?>_label"
                         name="section<?= $i ?>_label"
                         maxlength="200"
-                        placeholder="Titre de la section <?= $i ?>"><?= htmlspecialchars($article['section' . $i . '_label'] ?? '') ?></texatarea>
+                        placeholder="Titre de la section <?= $i ?>"><?= ($article['section' . $i . '_label'] ?? '') ?></texatarea>
                 </fieldset>
 
                 <fieldset class="form-group">
@@ -91,7 +91,7 @@ $is_edit = !empty($article['id']);
                         name="section<?= $i ?>_content"
                         rows="10"
                         class="content-editor"
-                        placeholder="Contenu de la section <?= $i ?>"><?= htmlspecialchars($article['section' . $i . '_content'] ?? '') ?></textarea>
+                        placeholder="Contenu de la section <?= $i ?>"><?= ($article['section' . $i . '_content'] ?? '') ?></textarea>
                 </fieldset>
             </div>
         <?php endfor; ?>

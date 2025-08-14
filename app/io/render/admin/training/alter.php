@@ -22,7 +22,7 @@ $is_edit = !empty($training['id']);
         <fieldset class="form-group">
             <label for="label">Titre de la formation *</label>
             <textarea type="text" name="label" id="label"
-                required maxlength="200"><?= htmlspecialchars($training['label'] ?? '') ?>
+                required maxlength="200"><?= ($training['label'] ?? '') ?>
             </textarea>
         </fieldset>
 
@@ -30,13 +30,13 @@ $is_edit = !empty($training['id']);
             <label for="subtitle">Sous-titre de la formation *</label>
             <textarea type="text" name="subtitle" id="subtitle"
                 required maxlength="255">
-                <?= htmlspecialchars($training['subtitle'] ?? '') ?>
+                <?= ($training['subtitle'] ?? '') ?>
             </textarea>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="content">Description *</label>
-            <textarea name="content" class="content-editor" id="description" rows="6" required><?= htmlspecialchars($training['content'] ?? '') ?></textarea>
+            <textarea name="content" class="content-editor" id="description" rows="6" required><?= ($training['content'] ?? '') ?></textarea>
         </fieldset>
 
         <div class="form-row">
@@ -81,25 +81,25 @@ $is_edit = !empty($training['id']);
 
         <fieldset class="form-group">
             <label for="objectives">Objectifs pédagogiques</label>
-            <textarea name="objectives" id="objectives" rows="4"><?= htmlspecialchars($training['objectives'] ?? '') ?></textarea>
+            <textarea name="objectives" id="objectives" rows="4"><?= ($training['objectives'] ?? '') ?></textarea>
             <small>Décrivez ce que les participants apprendront</small>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="prerequisites">Prérequis</label>
-            <textarea name="prerequisites" id="prerequisites" rows="3"><?= htmlspecialchars($training['prerequisites'] ?? '') ?></textarea>
+            <textarea name="prerequisites" id="prerequisites" rows="3"><?= ($training['prerequisites'] ?? '') ?></textarea>
             <small>Connaissances ou expérience nécessaires</small>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="pause">Pause/Lunch</label>
-            <textarea name="pause" id="pause" rows="4"><?= htmlspecialchars($training['pause'] ?? '') ?></textarea>
+            <textarea name="pause" id="pause" rows="4"><?= ($training['pause'] ?? '') ?></textarea>
             <small>Dispositions pour le cafe du matin ou la pause du midi</small>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="parking">Parking</label>
-            <textarea name="parking" id="parking" rows="3"><?= htmlspecialchars($training['parking'] ?? '') ?></textarea>
+            <textarea name="parking" id="parking" rows="3"><?= ($training['parking'] ?? '') ?></textarea>
             <small>Dispositions pour le parking</small>
         </fieldset>
     </section>

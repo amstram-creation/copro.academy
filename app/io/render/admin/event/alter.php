@@ -29,7 +29,7 @@ $is_edit = !empty($event['id']);
                 value=""
                 required
                 maxlength="200"
-                aria-describedby="label-help"><?= htmlspecialchars($event['label'] ?? '') ?>
+                aria-describedby="label-help"><?= ($event['label'] ?? '') ?>
             </textarea>
 
         </fieldset>
@@ -53,7 +53,7 @@ $is_edit = !empty($event['id']);
                 name="content"
                 rows="10"
                 required
-                class="content-editor"><?= htmlspecialchars($event['content'] ?? '') ?></textarea>
+                class="content-editor"><?= ($event['content'] ?? '') ?></textarea>
         </fieldset>
 
         <div class="form-row">
@@ -115,7 +115,7 @@ $is_edit = !empty($event['id']);
                 name="location"
                 maxlength="200"
                 aria-describedby="location-help">
-                <?= htmlspecialchars($event['location'] ?? '') ?>
+                <?= $event['location'] ?? '' ?>
             </textarea>
             <small id="location-help">Adresse physique ou plateforme en ligne</small>
         </fieldset>
