@@ -34,7 +34,7 @@
                     ?>
                     <tr <?= $is_past ? ' class="past"' : '' ?>>
                         <td>
-                            <strong><?= htmlspecialchars($article['label']) ?></strong>
+                            <strong><?= e($article,'label') ?></strong>
                             <?php if ($article['featured']): ?>
                                 <span class="badge featured">À la une</span>
                             <?php endif; ?>

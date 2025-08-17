@@ -26,7 +26,7 @@ $level_to_class = function ($slug) {
     <div class="filters mb-xl" role="group" aria-label="<?= l('formation.filters_aria') ?>">
         <button class="filter-btn active" data-type="all"><?= l('formation.catalogue.all'); ?></button>
         <?php foreach ($formation_niveau as $slug => $label): ?>
-            <button class="filter-btn" data-type="<?= htmlspecialchars($slug) ?>"><?= htmlspecialchars($label) ?></button>
+            <button class="filter-btn" data-type="<?= $slug ?>"><?= ($label) ?></button>
         <?php endforeach; ?>
     </div>
 

@@ -5,6 +5,8 @@ function e($content, ?string $field = null)
     $e = is_array($content)
         ? (array_key_exists($field, $content) ? $content[$field] : $field)
         : $content;
+    $e = strip_tags($e);
+    $e = trim($e);
     return htmlspecialchars((string)$e, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 

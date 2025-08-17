@@ -22,29 +22,17 @@ $is_edit = !empty($event['id']);
 
         <fieldset class="form-group">
             <label for="label">Titre de l'événement *</label>
-            <textarea
+            <input
                 type="text"
                 id="label"
                 name="label"
-                value=""
                 required
                 maxlength="200"
-                aria-describedby="label-help"><?= ($event['label'] ?? '') ?>
-            </textarea>
+                aria-describedby="label-help"
+                value="<?= $event['label'] ?? '' ?>" />
 
         </fieldset>
-        <fieldset class="form-group">
 
-            <label for="label">Slug *</label>
-            <input
-                type="text"
-                name="slug"
-                value="<?= htmlspecialchars($event['slug'] ?? '') ?>"
-                required
-                maxlength="200"
-                aria-describedby="label-help">
-            <small id="label-help">Le slug sera généré automatiquement</small>
-        </fieldset>
 
         <fieldset class="form-group">
             <label for="content">Description *</label>
@@ -161,7 +149,18 @@ $is_edit = !empty($event['id']);
             <header>
                 <h2>Métadonnées</h2>
             </header>
+            <fieldset class="form-group">
 
+                <label for="label">Slug *</label>
+                <input
+                    type="text"
+                    name="slug"
+                    value="<?= htmlspecialchars($event['slug'] ?? '') ?>"
+                    required
+                    maxlength="200"
+                    aria-describedby="label-help">
+                <small id="label-help">Le slug sera généré automatiquement</small>
+            </fieldset>
             <fieldset class="form-group">
                 <label for="category_slug">Catégorie</label>
                 <select id="category_slug" name="category_slug">

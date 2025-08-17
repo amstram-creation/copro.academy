@@ -89,7 +89,7 @@ for ($i = 1; $i <= 5; $i++) {
                 <?php foreach ($sections as $sec): ?>
                     <section id="<?= e($sec, 'id') ?>">
                         <h2><?= e($sec, 'label') ?></h2>
-                        <?= nl2br($sec['content']) ?>
+                        <?= $sec['content'] ?>
                     </section>
                 <?php endforeach; ?>
             </div>
@@ -103,8 +103,7 @@ for ($i = 1; $i <= 5; $i++) {
             <div class="related-grid">
                 <?php foreach ($related_articles as $related): ?>
                     <article class="related-card">
-                        <img
-                            src="/asset/image/article/avatar/<?= e($related, 'slug'); ?>"
+                        <img src="/asset/image/article/avatar/<?= e($related, 'slug'); ?>"
                             alt="<?= e($related, 'label') ?>"
                             width="200" height="120">
                         <div class="related-content">

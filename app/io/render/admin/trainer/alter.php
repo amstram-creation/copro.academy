@@ -26,17 +26,7 @@ $is_edit = !empty($trainer['id']);
             <input type="text" name="label" id="label"
                 value="<?= htmlspecialchars($trainer['label'] ?? '') ?>"
                 required maxlength="100">
-            <label for="label">Slug *</label>
-            <input
-                type="text"
-                name="slug"
-                value="<?= htmlspecialchars($trainer['slug'] ?? '') ?>"
-                required
-                maxlength="200"
-                aria-describedby="label-help">
-            <small>Généré automatiquement à partir du nom</small>
         </fieldset>
-
 
         <fieldset class="form-group">
             <label for="email">Email</label>
@@ -80,6 +70,20 @@ $is_edit = !empty($trainer['id']);
                     </span>
                 </label>
 
+            </fieldset>
+
+
+            <fieldset class="form-group">
+
+                <label for="label">Slug *</label>
+                <input
+                    type="text"
+                    name="slug"
+                    value="<?= htmlspecialchars($trainer['slug'] ?? '') ?>"
+                    required
+                    maxlength="200"
+                    aria-describedby="label-help">
+                <small>Généré automatiquement à partir du nom</small>
             </fieldset>
 
             <footer>

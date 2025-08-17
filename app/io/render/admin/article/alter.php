@@ -24,30 +24,15 @@ $is_edit = !empty($article['id']);
     <section class="form-main">
         <fieldset class="form-group">
             <label for="label">Titre *</label>
-            <textarea
+            <input
                 type="text"
                 id="label"
                 name="label"
                 required
                 maxlength="200"
-                aria-describedby="label-help">
-                <?= ($article['label'] ?? '') ?>
-            </textarea>
+                aria-describedby="label-help"
+                value="<?= ($article['label'] ?? '') ?>" />
         </fieldset>
-
-        <fieldset class="form-group">
-            <label for="slug">Slug *</label>
-            <input
-                type="text"
-                id="slug"
-                name="slug"
-                value="<?= htmlspecialchars($article['slug'] ?? '') ?>"
-                required
-                maxlength="205"
-                aria-describedby="slug-help">
-            <small id="slug-help">Le slug sera généré automatiquement</small>
-        </fieldset>
-
         <fieldset class="form-group">
             <label for="summary">Résumé</label>
             <textarea

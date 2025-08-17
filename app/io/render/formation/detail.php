@@ -79,7 +79,7 @@
                                 <div class="timeline-item">
                                     <span class="time"><?= date('G\hi', strtotime($it['time_start'])) ?> - <?= date('G\hi', strtotime($it['time_end'])) ?></span>
                                     <div class="content">
-                                        <h4><?= htmlspecialchars($it['label'] ?? '') ?></h4>
+                                        <h4><?= $it['label'] ?? '' ?></h4>
                                         <ul>
                                             <li><?= l('formation.content.legal_evolution') ?></li>
                                             <li><?= l('formation.content.civil_code') ?></li>

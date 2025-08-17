@@ -21,9 +21,8 @@ $is_edit = !empty($training['id']);
     <section class="form-main">
         <fieldset class="form-group">
             <label for="label">Titre de la formation *</label>
-            <textarea type="text" name="label" id="label"
-                required maxlength="200"><?= ($training['label'] ?? '') ?>
-            </textarea>
+            <input type="text" name="label" id="label"
+                required maxlength="200" value="<?= ($training['label'] ?? '') ?>" />
         </fieldset>
 
         <fieldset class="form-group">
