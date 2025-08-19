@@ -9,10 +9,10 @@ return function () {
 
         $prep = qp(db(), "UPDATE lang SET msgstr = ? WHERE code = ? AND msgid = ?");
         foreach ($content as $msgid => $msgstr) {
-            // vd(0, [$msgstr, $currentLang, $msgid]);
-            $prep->execute([$msgstr, $currentLang, $msgid]);
+            if(! $prep->execute([$msgstr, $currentLang, $msgid])){
+                vd(-1, $prep->errorInfo());
+            }
         }
-
         http_out(200, '', ['Location' => "?lang=$currentLang"]);
         exit;
     }
