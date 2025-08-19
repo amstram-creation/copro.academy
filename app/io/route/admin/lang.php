@@ -14,9 +14,10 @@ return function () {
         }
 
         http_out(200, '', ['Location' => "?lang=$currentLang"]);
+        exit;
     }
 
-    $load = qp(db(), "SELECT msgid, msgstr FROM lang WHERE code = ?", [$currentLang])
+    $content = qp(db(), "SELECT msgid, msgstr FROM lang WHERE code = ?", [$currentLang])
         ->fetchAll(PDO::FETCH_KEY_PAIR);
 
     // Group by section prefix (unchanged)
