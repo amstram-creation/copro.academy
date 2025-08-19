@@ -11,11 +11,15 @@ return function () {
             db(),
             "UPDATE lang SET msgstr = ? WHERE code = ? AND msgid = ?"
         );
+        vd(0, $prep);
+        foreach ($content as $msgid => $msgstr) {
+            vd(0, [$msgstr, $currentLang, $msgid]);
 
-        foreach ($content as $msgid => $msgstr) 
-            $prep->execute([$msgstr, $currentLang, $msgid]);
-        
 
+            vd($prep->execute([$msgstr, $currentLang, $msgid]));
+        }
+
+        die;
         http_out(200, '', ['Location' => "?lang=$currentLang"]);
     }
 
