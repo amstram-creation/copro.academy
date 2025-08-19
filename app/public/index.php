@@ -2,20 +2,24 @@
 
 set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../..');
 
+
 require 'add/badhat/build.php';
 require 'add/badhat/error.php';
 require 'add/badhat/core.php';
 require 'add/badhat/db.php';
 require 'add/badhat/auth.php';
+// require 'add/badhat/trust.php';
 require 'app/morph/html.php';
 
+// csrf(TRUST_SETUP, 3600, 'csrf_global');
+// vd(csrf(TRUST_GUARD));
+// die;
 
 // vd(qp(db(),"INSERT INTO operator (label, username, password_hash, status) VALUES (?, ?, ?, 1)",['jp', 'jp', password_hash('jp', PASSWORD_DEFAULT)]));die;
 try {
     auth(AUTH_SETUP, 'operator.username', qp(db(), "SELECT `password_hash` FROM `operator` WHERE `username` = ?"));
     l('fra'); // load french language
-
-
+   
     $io = __DIR__ . '/../io';
     $in_path    = $io . '/route';
     $out_path   = $io . '/render';

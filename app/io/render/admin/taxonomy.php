@@ -1,8 +1,3 @@
-<?php
-// app/io/render/admin/taxonomy.php
-?>
-
-
 <div class="meta-box panel">
     <header>
         <h2>Ajouter une catégorie</h2>
@@ -35,7 +30,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Créer</button>
     </form>
-
 </div>
 
 <div class="page-header">
@@ -44,8 +38,6 @@
         <a href="/admin/site" class="btn secondary">Retour à la configuration</a>
     </div>
 </div>
-
-
 
 <form method="POST" class="alter-form">
     <?= csrf_field(3600) ?>
