@@ -1,8 +1,8 @@
 <?php
 
 require_once 'add/arrow/arrow.php';
+require_once 'add/brevo.php';
 require_once 'app/mapper/taxonomy.php';
-require_once 'app/mail/mail.php';
 
 return function () {
 
@@ -31,29 +31,30 @@ return function () {
         'subject_slug'  => $_POST['sujet'] ?? '',
     ];
 
-    // Send notification to site admin using mail_notif()
-    $sent = mail_notif('info@copro.academy', 'Copro.Academy - Nouvelle demande de contact', ...contact_request_content($clean));
-    if (!$sent) {
-        header('Location: /contact/?message=' . urlencode('Erreur lors de l\'envoi de l\'email.'));
-        exit;
-    }
+
 
     // Save contact request to DB
     $contact = row(db(), 'contact_request');
     $contact(ROW_SET | ROW_SCHEMA);
     $contact(ROW_SET | ROW_SAVE, $clean + $_POST + $tracking);
 
-    if ($contact(ROW_GET | ROW_ERROR) === null) {
-        header('Location: /contact/?message=succes');
-    } else {
-        $message = $contact(ROW_GET | ROW_ERROR);
-        header('Location: /contact/?message=' . urlencode($message));
+    // Send notification to site admin using mail_notif()
+    try {
+        [$html, $text] = contact_request_content($clean);
+        send_brevo_mail('info@copro.academy', 'lannoy@jbrmanagement.be', 'Copro.Academy - Nouvelle demande de contact', $html, $text);
+        $sent = send_brevo_mail('info@copro.academy', 'cc_test_copro.academy@amstram.be', 'Copro.Academy - Nouvelle demande de contact', $html, $text);
+    } catch (Throwable $e) {
+        error_log("Brevo mail error: " . $e->getMessage());
     }
+
+    $message = ($sent || $contact(ROW_GET | ROW_ERROR) === null) ? 'success' : 'failure';
+    header('Location: /contact/?message='.$message);
     exit;
 };
 
 
-function contact_request_content($clean){
+function contact_request_content($clean)
+{
     // Build email content in French
     $html = '<h1>Nouvelle demande de contact</h1>' .
         '<p><strong>Nom :</strong> ' . $clean['name'] . '</p>' .

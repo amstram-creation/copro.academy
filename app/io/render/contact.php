@@ -1,6 +1,6 @@
 <?php
 $callback = isset($_GET['message']);
-$success = $callback && $_GET['message'] === 'succes';
+$success = $callback && $_GET['message'] === 'success';
 ?>
 
 <h1><?= l('contact.title'); ?></h1>
@@ -9,9 +9,9 @@ $success = $callback && $_GET['message'] === 'succes';
 <section>
     <div class="card <?= $callback && !$success ? 'warning-box' : '' ?> p-xl text-center mb-xl">
         <?php if (isset($_GET['message'])): ?>
-            <?php $key = $_GET['message'] === 'succes' ? 'success' : 'error'; ?>
+            <?php $key = $success ? 'success' : 'error'; ?>
             <h2 class="mb-md"><?= l('contact.form.' . $key . '.title'); ?></h2>
-            <?php if ($_GET['message'] === 'succes'): ?>
+            <?php if ($success): ?>
                 <p class="mb-0"> <?= l('contact.form.' . $key . '.text'); ?></p>
             <?php else: ?>
                 <p class="mb-0"> <?= l('contact.form.' . $key . '.text'); ?></p>
