@@ -25,9 +25,15 @@ $is_edit = !empty($trainer['id']);
             <label for="label">Nom complet *</label>
             <input type="text" name="label" id="label"
                 value="<?= htmlspecialchars($trainer['label'] ?? '') ?>"
-                required maxlength="100">
+                required maxlength="255">
         </fieldset>
 
+        <fieldset class="form-group">
+            <label for="title">Titre</label>
+            <input type="text" name="title" id="title"
+                value="<?= htmlspecialchars($trainer['title'] ?? '') ?>"
+                required maxlength="255">
+        </fieldset>
         <fieldset class="form-group">
             <label for="email">Email</label>
             <input type="email" name="email" id="email"
