@@ -80,7 +80,7 @@ CREATE TABLE training (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     slug VARCHAR(205) NOT NULL,
     label VARCHAR(200) NOT NULL,
-    subtitle VARCHAR(255) NULL,
+    subtitle VARCHAR(500) NULL,
     content TEXT NOT NULL,
     level_id INT UNSIGNED NOT NULL,
     duration_days SMALLINT UNSIGNED NOT NULL,

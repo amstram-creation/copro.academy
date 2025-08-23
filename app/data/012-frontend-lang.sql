@@ -61,7 +61,7 @@ INSERT INTO lang (code, msgid, msgstr) VALUES
 ('fra', 'formation.content.additional_resources', 'Ressources complémentaires'),
 ('fra', 'formation.registration', 'Inscription'),
 ('fra', 'formation.vat_detail', 'HT (TVA 21%)'),
-('fra', 'formation.total_ttc', 'Total TTC : 544,50€'),
+('fra', 'formation.total_ttc', 'Total TTC'),
 ('fra', 'formation.register_now', 'S\'inscrire maintenant'),
 ('fra', 'formation.practical_info', 'Informations pratiques'),
 ('fra', 'formation.location_label', 'Lieu :'),
