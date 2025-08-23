@@ -301,9 +301,7 @@ $is_edit = !empty($training['id']);
     </aside>
 
     <footer class="form-actions">
-        <button type="submit" class="btn">
-            <?= $is_edit ? 'Mettre à jour' : 'Créer la formation' ?>
-        </button>
+        <button type="submit" class="btn">Sauver</button>
         <a href="/admin/training" class="btn secondary">Retour</a>
 
         <?php if ($is_edit): ?>

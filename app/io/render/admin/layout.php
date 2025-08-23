@@ -130,8 +130,8 @@ $user = auth();
                     if (q) {
                         q.focus();
                         // optional: visual hint
-                        q.container.classList.add('ring-2', 'ring-red-500');
-                        setTimeout(() => q.container.classList.remove('ring-2', 'ring-red-500'), 1200);
+                        q.container.classList.add('quill-error-ring');
+                        setTimeout(() => q.container.classList.remove('quill-error-ring'), 1200);
                     }
                 });
             });
@@ -139,6 +139,8 @@ $user = auth();
             // Optional: on submit, final sync (harmless if already synced)
             document.querySelectorAll('form:has(.wysiwyg)').forEach((form) => {
                 form.addEventListener('submit', () => {
+
+
                     form.querySelectorAll('textarea').forEach((ta) => {
                         const q = quillByTextarea.get(ta);
                         if (!q) return;
@@ -147,6 +149,34 @@ $user = auth();
                         ta.value = plain ? html : '';
                     });
                 });
+
+
+            });
+
+            document.querySelectorAll('form').forEach((form) => {
+                form.addEventListener('invalid', (e) => {
+                    console.log('invalid', e);
+                    e.preventDefault(); // stop native focus jump
+
+                    const field = e.target;
+
+                    // Remove any previous error text
+                    let msg = field.parentNode.querySelectorAll('.field-error-text');
+                    msg.forEach((msg) => msg.remove());
+
+                    // Insert new error text (browser decides message via validationMessage)
+                    msg = document.createElement('span');
+                    msg.className = 'field-error-text';
+                    msg.textContent = field.validationMessage;
+                    field.parentNode.appendChild(msg);
+
+                    // Wiggle all submit buttons
+                    const submitButtons = form.querySelectorAll('button[type="submit"], input[type="submit"]');
+                    submitButtons.forEach((btn) => {
+                        btn.classList.add('submit-error');
+                        setTimeout(() => btn.classList.remove('submit-error'), 1000);
+                    });
+                }, true);
             });
         });
     </script>
