@@ -3,11 +3,17 @@
 // /admin/upload/xxxx
 
 return function ($args = null) {
-    
+    if(!$_FILES){
+        $message = [
+            'success' => false, 
+            'error' => 'The server refused or did not receive the data (check file size or encoding)',
+        ];
+        http_out(400, json_encode($message), ['Content-Type' => 'application/json']);
+    }
     $upload_to = implode(DIRECTORY_SEPARATOR, $args);
     $base_file = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . "/asset/image/$upload_to";
     try {
-        $result = upload_image($_FILES['avatar'], $base_file, 20*1024);
+        $result = upload_image($_FILES['avatar'] ?? [], $base_file);
         $result || http_out(400, json_encode(['success' => false, 'error' => 'Invalid file upload']), ['Content-Type' => 'application/json']);
 
         $result = str_replace($_SERVER['DOCUMENT_ROOT'], '', $result);
@@ -18,7 +24,7 @@ return function ($args = null) {
     }
 };
 
-function upload_image(array $http_post_file, string $absolute_file_path, int $max_kb = 2048, int $quality = 90): ?string
+function upload_image(array $http_post_file, string $absolute_file_path, ?int $max_kb = null, int $quality = 90): ?string
 {
     $_file = payload_guard($http_post_file, $max_kb);
     $gd_image = gd_create($_file)                       ?? throw new BadMethodCallException('Unsupported image type or error creating image resource');
@@ -27,21 +33,37 @@ function upload_image(array $http_post_file, string $absolute_file_path, int $ma
     return save_gd_image($gd_image, $absolute_file_path, $quality);
 }
 
-function payload_guard($_file, $max_kb = 2048)
+function payload_guard($_file, ?int $max_kb = null)
 {
     empty($_file['tmp_name'])              && throw new BadMethodCallException('No file uploaded');
     is_uploaded_file($_file['tmp_name'])   || throw new BadMethodCallException('File is not uploaded via HTTP POST');
     empty($_file['size'])                  && throw new BadMethodCallException('File size is missing');
     empty($_file['type'])                  && throw new BadMethodCallException('File type is missing');
-    
-    $_file['size'] > $max_kb * 1024        && throw new BadMethodCallException('File size exceeds the limit');
 
-    empty($_file['error']) 
-    || $_file['error'] === UPLOAD_ERR_OK   || throw new BadMethodCallException('File upload error');
+    $max_kb !== null && $_file['size'] > $max_kb * 1024       && throw new BadMethodCallException('File size exceeds the application limit');
 
+    if (!empty($_file['error']) && $_file['error'] !== UPLOAD_ERR_OK) {
+        switch ($_file['error']) {
+            case UPLOAD_ERR_INI_SIZE:  // Exceeds upload_max_filesize
+                $message = "The file is larger than PHP allows (upload_max_filesize).";
+                break;
+            case UPLOAD_ERR_FORM_SIZE: // Exceeds MAX_FILE_SIZE hidden input (if set)
+                $message = "The file is larger than the form allows (". (max_upload()/1024)." kb).";
+                break;
+            case UPLOAD_ERR_PARTIAL:
+                $message = "The file was only partially uploaded.";
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                $message = "No file was uploaded.";
+                break;
+            default:
+                $message = "Upload error code: " . $_file['error'];
+        }
+        throw new BadMethodCallException($message);
+    }
 
     $mime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $_file['tmp_name']);
-    $mime === $_file['type']               || throw new BadMethodCallException('Invalid file type');
+    $mime === $_file['type']               || throw new BadMethodCallException('File type doesnt match MIME content');
 
     return $_file;
 }
@@ -104,11 +126,11 @@ function save_gd_image(GdImage $gd_image, string $absolute_file_path, int $quali
 
     // Get directory and filename without extension
     $folder = dirname($absolute_file_path);
-    
+
     if (!is_dir($folder) && !mkdir($folder, 0755, true)) {
         throw new RuntimeException("Failed to create directory: $folder");
     }
-    
+
     $target = rtrim($folder, '/\\');
     $target = $target . DIRECTORY_SEPARATOR . pathinfo($absolute_file_path, PATHINFO_FILENAME);
     $candidate = "{$target}.webp";
@@ -126,4 +148,22 @@ function save_gd_image(GdImage $gd_image, string $absolute_file_path, int $quali
     }
 
     return ($candidate);
+}
+
+
+function max_upload()
+{
+    $bytes = function ($val) {
+        $val = trim($val);
+        $last = strtolower($val[strlen($val) - 1]);
+        $val = (int)$val;
+        switch ($last) {
+            case 'g': $val *= 1024;
+            case 'm': $val *= 1024;
+            case 'k': $val *= 1024;
+        }
+        return $val;
+    };
+
+    return min($bytes(ini_get('upload_max_filesize')), $bytes(ini_get('post_max_size')), $bytes(ini_get('memory_limit')));
 }

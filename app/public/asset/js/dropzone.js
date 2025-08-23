@@ -86,11 +86,13 @@ async function _uploadFile(file, zone, labelSpan, input, uploadUrl) {
       body: formData,
     });
     const data = await resp.json();
-    if (data.success) {
-      zone.querySelector('img.drop-preview').setAttribute('src', data.url);
+    if (data.error) {
+      labelSpan.textContent = data.error;
+      console.error('Upload error response:', data.error);
+
     } else {
-      labelSpan.textContent = 'Upload failed';
-      console.error('Upload error response:', data);
+      zone.querySelector('img.drop-preview').setAttribute('src', data.url);
+      labelSpan.textContent = 'Image OK';
     }
   } catch (err) {
     console.error('Upload exception:', err);
