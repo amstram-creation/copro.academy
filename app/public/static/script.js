@@ -23,19 +23,31 @@ const utils = {
     }),
   formatPubDates: (selector = 'time[datetime]') => {
     document.querySelectorAll(selector).forEach((el) => {
-      const date = new Date(el.getAttribute('datetime'));
+      const datetime = el.getAttribute('datetime');
+      const date = new Date(datetime);
+
       if (!isNaN(date)) {
-        el.textContent =
-          date.toLocaleDateString('fr-FR', {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric',
-          }) +
-          ' à ' +
-          date.toLocaleTimeString('fr-FR', {
-            hour: '2-digit',
-            minute: '2-digit',
-          });
+        // Always show the date
+        let formatted = date.toLocaleDateString('fr-FR', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        });
+
+        // Detect if datetime string includes a time portion
+        // (e.g., contains "T" and not just "YYYY-MM-DD")
+        const hasTime = /T\d{2}:\d{2}/.test(datetime);
+
+        if (hasTime) {
+          formatted +=
+            ' à ' +
+            date.toLocaleTimeString('fr-FR', {
+              hour: '2-digit',
+              minute: '2-digit',
+            });
+        }
+
+        el.textContent = formatted;
       }
     });
   },

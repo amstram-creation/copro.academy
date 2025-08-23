@@ -49,25 +49,28 @@ $level_to_class = function ($slug) {
                             <p class="text-sm mb-xs"><strong><?= l('formation.duration_label') ?> :</strong> <?= $item['duration_days'] ?? '?' ?> <?= l('formation.days') ?> (<?= $item['duration_hours'] ?? '?' ?>h)</p>
                         <?php endif; ?>
                         <?php if (isset($item['start_date'])): ?>
-                            <p class="text-sm mb-xs"><strong><?= l('formation.date_label') ?> :</strong> <?= $item['start_date'] ?? '?' ?></p>
+                            <p class="text-sm mb-xs"><strong><?= l('formation.date_label') ?> :</strong> <time datetime="<?= $item['start_date'] ?? '' ?>"><?= $item['start_date'] ?? '?' ?></time></p>
                         <?php endif; ?>
                         <?php if (isset($item['price_ht'])): ?>
-                            <p class="text-sm mb-0"><strong><?= l('formation.price_label') ?> :</strong> <?= $item['price_ht'] ?? '?' ?>€ <?= l('formation.ht_label') ?></p>
+                            <p class="text-sm mb-0"><strong><?= l('formation.price_label') ?> :</strong> <span class="price"><?= $item['price_ht'] ?? '?' ?></span> <?= l('formation.ht_label') ?></p>
                         <?php endif; ?>
                     </div>
 
                     <p class="card__content"><?= $item['content'] ?? '' ?></p>
 
-                    <div class="formation-objectives mb-lg">
-                        <h4 class="text-primary mb-sm"><?= l('formation.objectives_label') ?> :</h4>
-                        <?php $objectives = explode(';', $item['objectives'] ?? '') ?>
-                        <ul class="text-sm">
-                            <?php foreach ($objectives as $objective): ?>
-                                <li><?= trim($objective) ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-
+                    <?php
+                    $objectives = explode(';', $item['objectives'] ?? '');
+                    if (trim($item['objectives'] ?? '')):
+                    ?>
+                        <div class="formation-objectives mb-lg">
+                            <h4 class="text-primary mb-sm"><?= l('formation.objectives_label') ?> :</h4>
+                            <ul class="text-sm">
+                                <?php foreach ($objectives as $objective): ?>
+                                    <li><?= trim($objective) ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
                     <a href="/formation/detail/<?= $item['slug'] ?>" class="btn btn--primary w-full"><?= l('formation.view_details') ?></a>
                 </div>
             </article>

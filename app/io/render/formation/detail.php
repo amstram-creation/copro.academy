@@ -33,7 +33,7 @@
                 <span class="icon">💰</span>
                 <div>
                     <strong><?= l('formation.price_label') ?></strong>
-                    <p><?= $training['price_ht'] ?>€ <?= l('formation.ht_label') ?></p>
+                    <p><span class="price"><?= $training['price_ht'] ?></span> <?= l('formation.ht_label') ?></p>
                 </div>
             </div>
             <div class="info-item">
@@ -102,11 +102,11 @@
             <div class="inscription-card">
                 <h3><?= l('formation.registration') ?></h3>
                 <div class="price-info">
-                    <span class="price"><?= $training['price_ht'] ?>€</span>
+                    <span class="price"><?= $training['price_ht'] ?></span>
                     <span class="price-detail"><?= l('formation.vat_detail') ?></span>
                 </div>
                 <div class="total-price">
-                    <strong><?= l('formation.total_ttc') ?></strong>
+                    <strong><?= l('formation.total_ttc') ?>: <span class="price"><?= (float)($training['price_ht']) * 1.21 ?></span></strong>
                 </div>
                 <a href="/contact?sujet=sujet-formation" class="cta"><?= l('formation.register_now') ?></a>
 
