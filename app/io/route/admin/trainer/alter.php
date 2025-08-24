@@ -3,7 +3,7 @@ require_once 'add/arrow/arrow.php';
 
 return function ($slug = null) {
     $slug = $slug[0] ?: null;
-    $trainer = row(db(), 'trainer', 'slug');
+    $trainer = row(db(), 'trainer', 'id');
 
     if ($slug) {
         $trainer(ROW_LOAD, ['slug' => $slug]);
