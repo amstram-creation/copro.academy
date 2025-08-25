@@ -26,7 +26,7 @@
                 <span class="icon">⏱️</span>
                 <div>
                     <strong><?= l('formation.duration_label') ?></strong>
-                    <p><?= $training['duration_days'] ?> <?= l('formation.days') ?> (<?= $training['duration_hours'] ?>h)</p>
+                    <p><?= $training['duration_hours'] ?>h</p>
                 </div>
             </div>
             <div class="info-item">
