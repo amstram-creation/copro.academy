@@ -67,7 +67,7 @@
                 <h2><?= l('formation.objectives_title') ?></h2>
                 <p><?= $training['objectives'] ?></p>
             </section>
-
+    <?php if($training_sessions_by_day): ?>
             <!-- Programme détaillé -->
             <section class="formation-program">
                 <h2><?= l('formation.program_title') ?></h2>
@@ -94,6 +94,7 @@
 
                 <?php endforeach; ?>
             </section>
+    <?php endif; ?>
         </div>
 
         <!-- Sidebar -->
