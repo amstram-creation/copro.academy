@@ -71,7 +71,7 @@ CREATE TABLE trainer (
     title VARCHAR(255) NULL,
     bio TEXT NULL,
     avatar VARCHAR(255) NULL,
-    email VARCHAR(100) NULL,
+    email VARCHAR(255) NOT NULL,
     hire_date DATE NULL
 ) ENGINE=InnoDB;
 

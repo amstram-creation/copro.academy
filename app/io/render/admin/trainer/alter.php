@@ -29,16 +29,16 @@ $is_edit = !empty($trainer['id']);
         </fieldset>
 
         <fieldset class="form-group">
-            <label for="title">Titre</label>
+            <label for="title">Titre *</label>
             <input type="text" name="title" id="title"
                 value="<?= htmlspecialchars($trainer['title'] ?? '') ?>"
                 required maxlength="255">
         </fieldset>
         <fieldset class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Email *</label>
             <input type="email" name="email" id="email"
                 value="<?= htmlspecialchars($trainer['email'] ?? '') ?>"
-                maxlength="100">
+                maxlength="255" required>
             <small>Adresse email professionnelle du formateur</small>
         </fieldset>
 
