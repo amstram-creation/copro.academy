@@ -19,7 +19,7 @@
                 <span class="icon">📅</span>
                 <div>
                     <strong><?= l('formation.date_label') ?></strong>
-                    <p><?= $training['start_date'] ?></p>
+                    <p><time datetime="<?= $training['start_date'] ?>"><?= $training['start_date'] ?></time></p>
                 </div>
             </div>
             <div class="info-item">
@@ -67,34 +67,34 @@
                 <h2><?= l('formation.objectives_title') ?></h2>
                 <p><?= $training['objectives'] ?></p>
             </section>
-    <?php if($training_sessions_by_day): ?>
-            <!-- Programme détaillé -->
-            <section class="formation-program">
-                <h2><?= l('formation.program_title') ?></h2>
-                <?php foreach ($training_sessions_by_day as $dayNum => $items): ?>
-                    <div class="program-day">
-                        <h3><?= l('formation.day') ?> <?= (int)$dayNum ?> : <?= l('formation.program.legal_foundations') ?></h3>
-                        <div class="program-timeline">
-                            <?php foreach ($items as $it): ?>
-                                <div class="timeline-item">
-                                    <span class="time"><?= date('G\hi', strtotime($it['time_start'])) ?> - <?= date('G\hi', strtotime($it['time_end'])) ?></span>
-                                    <div class="content">
-                                        <h4><?= $it['label'] ?? '' ?></h4>
-                                        <ul>
-                                            <li><?= l('formation.content.legal_evolution') ?></li>
-                                            <li><?= l('formation.content.civil_code') ?></li>
-                                            <li><?= l('formation.content.recent_jurisprudence') ?></li>
-                                        </ul>
+            <?php if ($training_sessions_by_day): ?>
+                <!-- Programme détaillé -->
+                <section class="formation-program">
+                    <h2><?= l('formation.program_title') ?></h2>
+                    <?php foreach ($training_sessions_by_day as $dayNum => $items): ?>
+                        <div class="program-day">
+                            <h3><?= l('formation.day') ?> <?= (int)$dayNum ?> : <?= l('formation.program.legal_foundations') ?></h3>
+                            <div class="program-timeline">
+                                <?php foreach ($items as $it): ?>
+                                    <div class="timeline-item">
+                                        <span class="time"><?= date('G\hi', strtotime($it['time_start'])) ?> - <?= date('G\hi', strtotime($it['time_end'])) ?></span>
+                                        <div class="content">
+                                            <h4><?= $it['label'] ?? '' ?></h4>
+                                            <ul>
+                                                <li><?= l('formation.content.legal_evolution') ?></li>
+                                                <li><?= l('formation.content.civil_code') ?></li>
+                                                <li><?= l('formation.content.recent_jurisprudence') ?></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
-                    </div>
 
 
-                <?php endforeach; ?>
-            </section>
-    <?php endif; ?>
+                    <?php endforeach; ?>
+                </section>
+            <?php endif; ?>
         </div>
 
         <!-- Sidebar -->
@@ -114,7 +114,10 @@
                 <div class="inscription-info">
                     <h4><?= l('formation.practical_info') ?></h4>
                     <ul>
+                        <strong><?= l('formation.date_label') ?></strong>
+                        <li><strong><?= l('formation.location_label') ?></strong> <time datetime="<?= $training['start_date'] ?>"><?= $training['start_date'] ?></time></li>
                         <li>📍 <strong><?= l('formation.location_label') ?></strong> <?= l('formation.location_brussels') ?></li>
+                        <li>📍 <strongw><?= l('formation.location_label') ?></strong> <?= l('formation.location_brussels') ?></li>
                         <li>☕ <strong><?= l('formation.breaks_label') ?></strong> <?= $training['pause'] ?></li>
                         <li>🅿️ <strong><?= l('formation.parking_label') ?></strong> <?= $training['parking'] ?></li>
                     </ul>
