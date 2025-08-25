@@ -54,7 +54,7 @@ $is_edit = !empty($event['id']);
                     value="<?= $event['event_date'] ? date('Y-m-d\TH:i', strtotime($event['event_date'])) : '' ?>"
                     required>
             </fieldset>
-
+            <?php if(false): ?>
             <fieldset class="form-group">
                 <label for="duration_minutes">Durée (minutes) *</label>
                 <input
@@ -64,10 +64,11 @@ $is_edit = !empty($event['id']);
                     min="15"
                     max="480"
                     value="<?= $event['duration_minutes'] ?? '' ?>"
-                    required
+                
                     aria-describedby="duration-help">
                 <small id="duration-help">Entre 15 minutes et 8 heures</small>
             </fieldset>
+            <?php endif; ?>
         </div>
 
         <div class="form-row">

@@ -60,7 +60,7 @@
                             <time datetime="<?= $event['event_date'] ?>">
                                 <?= date('d/m/Y', strtotime($event['event_date'])) ?><br>
                                 <small><?= date('H:i', strtotime($event['event_date'])) ?>
-                                    (<?= $event['duration_minutes'] ?>min)</small>
+                                   </small>
                             </time>
                             <?php if ($is_past): ?>
                                 <br><span class="badge past">Terminé</span>

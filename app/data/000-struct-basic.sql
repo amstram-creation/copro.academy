@@ -143,7 +143,7 @@ CREATE TABLE event (
     content TEXT NOT NULL,
     category_id INT UNSIGNED NOT NULL,
     event_date DATETIME NOT NULL,
-    duration_minutes SMALLINT UNSIGNED NOT NULL,
+    duration_minutes SMALLINT UNSIGNED NULL,
     price_ht DECIMAL(8,2) NULL,
     places_max SMALLINT UNSIGNED NULL,
     avatar VARCHAR(255) NULL,
