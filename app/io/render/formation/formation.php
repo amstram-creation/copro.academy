@@ -31,7 +31,7 @@ $level_to_class = function ($slug) {
                     class="card__image">
                 <div class="card__body">
 
-                    <?php if (isset($item['level_label'])): ?>
+                    <?php if (false && isset($item['level_label'])): ?>
                         <div class="badge badge--<?= $level_to_class($item['level_slug']) ?> mb-md"><?= $item['level_label'] ?></div>
                     <?php endif; ?>
 
