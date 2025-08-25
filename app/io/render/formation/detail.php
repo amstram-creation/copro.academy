@@ -115,7 +115,6 @@
                     <h4><?= l('formation.practical_info') ?></h4>
                     <ul>
                         <li>📍 <strong><?= l('formation.location_label') ?></strong> <?= l('formation.location_brussels') ?></li>
-                        <li>🕘 <strong><?= l('formation.schedule_label') ?></strong> <?= l('formation.schedule_hours') ?></li>
                         <li>☕ <strong><?= l('formation.breaks_label') ?></strong> <?= $training['pause'] ?></li>
                         <li>🅿️ <strong><?= l('formation.parking_label') ?></strong> <?= $training['parking'] ?></li>
                     </ul>
