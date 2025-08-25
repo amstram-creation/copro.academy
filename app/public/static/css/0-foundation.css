@@ -73,7 +73,7 @@ button {
 /* Remove link defaults */
 a {
     text-decoration: none;
-    color: inherit;
+    color: var(--color-primary);
 }
 
 /* Table defaults */
