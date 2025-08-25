@@ -38,8 +38,8 @@ $level_to_class = function ($slug) {
                     <h3 class="card__title"><?= $item['label'] ?? l('formation.no_title_fallback') ?></h3>
 
                     <div class="bg-gray-50 p-md rounded mb-md">
-                        <?php if (isset($item['duration_days']) && isset($item['duration_hours'])): ?>
-                            <p class="text-sm mb-xs"><strong><?= l('formation.duration_label') ?> :</strong> <?= $item['duration_days'] ?? '?' ?> <?= l('formation.days') ?> (<?= $item['duration_hours'] ?? '?' ?>h)</p>
+                        <?php if (isset($item['duration_hours'])): ?>
+                            <p class="text-sm mb-xs"><strong><?= l('formation.duration_label') ?> :</strong> <?= $item['duration_hours'] ?>h</p>
                         <?php endif; ?>
                         <?php if (isset($item['start_date'])): ?>
                             <p class="text-sm mb-xs"><strong><?= l('formation.date_label') ?> :</strong> <time datetime="<?= $item['start_date'] ?? '' ?>"><?= $item['start_date'] ?? '?' ?></time></p>
