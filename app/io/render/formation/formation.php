@@ -23,13 +23,6 @@ $level_to_class = function ($slug) {
     <h2 id="formations-title" class="text-center mb-2xl"><?= l('formation.catalogue'); ?></h2>
 
     <!-- Filtres de formations -->
-    <div class="filters mb-xl" role="group" aria-label="<?= l('formation.filters_aria') ?>">
-        <button class="filter-btn active" data-type="all"><?= l('formation.catalogue.all'); ?></button>
-        <?php foreach ($formation_niveau as $slug => $label): ?>
-            <button class="filter-btn" data-type="<?= $slug ?>"><?= ($label) ?></button>
-        <?php endforeach; ?>
-    </div>
-
     <div class="grid grid-cols-auto gap-xl" id="formationsContainer">
         <?php foreach ($formation as $item): ?>
             <!-- Formation card -->
