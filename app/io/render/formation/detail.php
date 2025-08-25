@@ -114,8 +114,7 @@
                 <div class="inscription-info">
                     <h4><?= l('formation.practical_info') ?></h4>
                     <ul>
-                        <li><strong><?= l('formation.date_label') ?></strong> <time datetime="<?= $training['start_date'] ?>"><?= $training['start_date'] ?></time></li>
-                        <li>📍 <strong><?= l('formation.location_label') ?></strong> <?= l('formation.location_brussels') ?></li>
+                        <li>📅 <strong><?= l('formation.date_label') ?></strong> <time datetime="<?= $training['start_date'] ?>"><?= $training['start_date'] ?></time></li>
                         <li>📍 <strongw><?= l('formation.location_label') ?></strong> <?= l('formation.location_brussels') ?></li>
                         <li>☕ <strong><?= l('formation.breaks_label') ?></strong> <?= $training['pause'] ?></li>
                         <li>🅿️ <strong><?= l('formation.parking_label') ?></strong> <?= $training['parking'] ?></li>
