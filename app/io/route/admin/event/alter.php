@@ -17,7 +17,7 @@ return function ($args) {
 
         $clean = $_POST;
         $clean['category_id']       = tag_id_by_slug($_POST['category_slug'], 'evenement-categorie') ?: null;
-        $clean['duration_minutes']  = (int)($_POST['duration_minutes'] ?? 0) ?: null;
+        // $clean['duration_minutes']  = (int)($_POST['duration_minutes'] ?? 0) ?: null;
         $clean['price_ht']          = ($_POST['price_ht'] ?? '') !== '' ? (float)$_POST['price_ht'] : null;
         $clean['places_max']        = ($_POST['places_max'] ?? '') !== '' ? (int)$_POST['places_max'] : null;
         $clean['online']            = (int)!empty($_POST['online']);
@@ -28,8 +28,17 @@ return function ($args) {
             ? ($clean['enabled_at'] = null)
             : ($clean['enabled_at'] = date('Y-m-d H:i:s'));
 
+        $event(ROW_SET | ROW_SCHEMA);
         $event(ROW_SET, $clean);
+
         $event(ROW_SAVE);
+        if ($event(ROW_GET | ROW_ERROR)) {
+            vd($event(ROW_GET | ROW_ERROR));
+            vd($event(ROW_GET | ROW_EDIT));
+            vd($event(ROW_GET | ROW_MORE));
+            die;
+        }
+
         http_out(302, '', ['Location' => "/admin/event/alter/" . $event(ROW_GET, ['slug'])]);
     }
 
